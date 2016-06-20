@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="Client 1">
+    <configurations>
+      <configuration name="Client 1" target-platform="Desktop" pure-as="true" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/out/production/BattlePlan">
+        <dependencies target-player="20.0">
+          <entries>
+            <entry library-name="Starling" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_Compiler_2.0.0.233" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-define=MM_ORDER::player_one,true -define=MM_ORDER::player_two,false" />
+        </compiler-options>
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main" />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+      <configuration name="Client 2" target-platform="Desktop" pure-as="true" main-class="Main" output-file="Main2.swf" output-folder="$MODULE_DIR$/out/production/BattlePlan">
+        <dependencies>
+          <entries>
+            <entry library-name="Starling" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_Compiler_2.0.0.233" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-define=MM_ORDER::player_one,false -define=MM_ORDER::player_two,true" />
+        </compiler-options>
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app2.xml" package-file-name="Main2" />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="AIRSDK_Compiler_2.0.0.233" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="Starling" level="project" />
+  </component>
+</module>

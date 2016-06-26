@@ -1,5 +1,6 @@
 package ui {
 import entities.Entity;
+import entities.Spawner;
 
 import flash.geom.Point;
 
@@ -78,7 +79,7 @@ public class HudLayer extends Sprite{
         }
     }
 
-    public function addPath(entity:Entity):void {
+    public function addPath(entity:Spawner):void {
 
         _paths[entity.getId()] = entity.getWayPoints();
 

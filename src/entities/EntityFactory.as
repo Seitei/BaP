@@ -6,16 +6,16 @@ public class EntityFactory {
     private static var _instance:EntityFactory;
     private var _autoIncrement:int;
 
-    public function createEntity(entityName:String, owner:String, position:Point, params:Object = null):Entity {
+    public function createEntity(entityName:String, owner:String, position:Point):Entity {
 
         var entity:Entity;
         var id:int = owner == "playerOne" ? 100000 : 200000;
         id += ++_autoIncrement;
-        //trace(id, "  ", entityName);
+
         switch(entityName){
 
             case "core":
-                entity = new Entity(id, "core", "core", {hitPoints: 1000});
+                entity = new Core(id, "core", 1000);
                 break;
 
 
@@ -23,31 +23,35 @@ public class EntityFactory {
 
             case "SMT1":
 
-                entity = new Entity(id, "spawner", "SMT1", {hitPoints: 100, price: 7, spawnRate: 1, spawn: "MT1", update: ["spawn"]});
+                entity = new Spawner(id, "SMT1", 100, 1, 1, "MT1", 10);
                 break;
 
             case "SMT2":
 
-                entity = new Entity(id, "spawner", "SMT2", {hitPoints: 200, price: 15, spawnRate: 1.5, spawn: "MT2", update: ["spawn"]});
+                entity = new Spawner(id, "SMT2", 200, 8, 2, "MT2", 20);
                 break;
 
             ///////////// UNITS /////////////
 
             case "MT1":
 
-                entity = new Entity(id, "unit", "MT1", {hitPoints: 100, speed: 1, range: 100, shootRate: 0.69, bullet: "MT1Bullet", update: ["move", "shoot"]});
+                entity = new Unit(id, "MT1", 50, 0.69, "MT1Bullet", 50, 1);
                 break;
 
             case "MT2":
-
-                entity = new Entity(id, "unit", "MT2", {hitPoints: 100, speed: 2, range: 250, damage: 12, update: ["move"]});
+                entity = new Unit(id, "MT2", 70, 0.49, "MT2Bullet", 35, 1);
                 break;
 
             ///////////// BULLETS /////////////
 
             case "MT1Bullet":
 
-                entity = new Entity(id, "bullet", "MT1Bullet", {speed: 2, damage: 12, update: ["move"]});
+                entity = new Bullet(id, "MT1Bullet", 2, 12);
+                break;
+
+            case "MT2Bullet":
+
+                entity = new Bullet(id, "MT2Bullet", 1, 22);
                 break;
 
 
@@ -56,9 +60,6 @@ public class EntityFactory {
 
         }
 
-        if(params){
-            entity.setParams(params);
-        }
 
         entity.setPosition(position);
         entity.setOwner(owner);

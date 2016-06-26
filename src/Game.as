@@ -164,17 +164,13 @@ public class Game extends Sprite {
             }
 
             message.data.params.wayPoints = invertedArray;
-
-        }
-
-        _entitiesByID[message.data.id].setParams(message.data.params);
-
-        if(message.data.params.wayPoints){
+            _entitiesByID[message.data.id].setWayPoints(invertedArray);
 
             HudLayer.getInstance().addPath(_entitiesByID[message.data.id]);
             HudLayer.getInstance().drawPath(message.data.id);
 
         }
+
 
     }
 
@@ -250,9 +246,9 @@ public class Game extends Sprite {
 
     }
 
-    public function createEntity(type:String, owner:String, position:Point, send:Boolean, params:Object = null):Entity {
+    public function createEntity(type:String, owner:String, position:Point, send:Boolean):Entity {
 
-        var entity:Entity = EntityFactory.getInstance().createEntity(type, owner, position, params);
+        var entity:Entity = EntityFactory.getInstance().createEntity(type, owner, position);
         addEntity(entity, send);
 
         return entity;

@@ -13,7 +13,7 @@ public class Main extends Sprite {
 
         _starling = new Starling(Game, stage);
         _starling.start();
-        _starling.showStats = true;
+        //_starling.showStats = true;
     }
 }
 }

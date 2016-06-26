@@ -1,5 +1,6 @@
 package gameLogic {
 import entities.Entity;
+import entities.Spawner;
 
 import flash.geom.Point;
 
@@ -15,7 +16,7 @@ import ui.HudLayer;
 public class GLMyTurn implements IGameLogic{
 
     private var _game:Game;
-    private var _currentEntity:Entity;
+    private var _currentEntity:Spawner;
     private var _buildingPath:Boolean;
     private var _stateName:int;
 
@@ -63,7 +64,7 @@ public class GLMyTurn implements IGameLogic{
             //TODO remove this and implement it in the UI
             if(processCost()){
 
-                showPath(_game.createEntity("SMT1", _game.getPlayer(), new Point(began.globalX, began.globalY), true));
+                showPath(Spawner(_game.createEntity("SMT1", _game.getPlayer(), new Point(began.globalX, began.globalY), true)));
 
             }
         }
@@ -74,7 +75,7 @@ public class GLMyTurn implements IGameLogic{
         return true;
     }
 
-    private function showPath(entity:Entity):void {
+    private function showPath(entity:Spawner):void {
 
         _currentEntity = entity;
         HudLayer.getInstance().beginPath(entity, onPathFinished);

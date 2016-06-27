@@ -3,12 +3,12 @@ import entities.Entity;
 import entities.Spawner;
 
 import flash.geom.Point;
-
-import flash.geom.Point;
 import flash.utils.Dictionary;
 
 import starling.display.Quad;
+import starling.display.QuadBatch;
 import starling.display.Sprite;
+import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
@@ -26,12 +26,43 @@ public class HudLayer extends Sprite{
     private var _activeSegmentTwo:Quad;
     private var _temporaryLines:Array;
     private var _onPathFinished:Function;
+    private var _turnAid:QuadBatch;
 
     public function HudLayer() {
 
         _paths = new Dictionary();
         _linePaths = new Dictionary();
         _temporaryLines = new Array();
+        addEventListener(Event.ADDED_TO_STAGE, onAdded );
+
+    }
+
+    private function onAdded(event:Event):void {
+        buildTurnAid();
+    }
+
+
+    private function buildTurnAid():void {
+
+        var top:Quad = new Quad(stage.stageWidth, 3);
+        var bot:Quad = new Quad(stage.stageWidth, 3);     bot.y = stage.stageHeight - bot.height;
+        var right:Quad = new Quad(3, stage.stageHeight);  right.x = stage.stageWidth - right.width;
+        var left:Quad = new Quad(3, stage.stageWidth);
+
+        _turnAid = new QuadBatch();
+        _turnAid.addQuad(top);
+        _turnAid.addQuad(bot);
+        _turnAid.addQuad(left);
+        _turnAid.addQuad(right);
+
+        for (var i:int = 0; i < 4; i++) {
+            _turnAid.setQuadColor(i, Color.GREEN);
+        }
+
+        _turnAid.alpha = 0.75;
+
+        addChild(_turnAid);
+        _turnAid.visible = false;
 
     }
 
@@ -68,7 +99,7 @@ public class HudLayer extends Sprite{
             pointOne = _paths[id][i];
             pointTwo = _paths[id][i + 1];
 
-            var line:Quad = new Quad(1, 1, Game.getInstance().getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayer() ? Color.RED : Color.GREEN);
+            var line:Quad = new Quad(1, 1, Game.getInstance().getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayerName() ? Color.RED : Color.GREEN);
             line.x = pointOne.x;
             line.y = pointOne.y;
             line.rotation = Math.atan2(pointTwo.y - pointOne.y, pointTwo.x - pointOne.x);
@@ -158,7 +189,11 @@ public class HudLayer extends Sprite{
     }
 
 
+    public function showTurnAid(value:Boolean):void {
 
+        _turnAid.visible = value;
+
+    }
 
 
 

@@ -1,5 +1,6 @@
 package {
 
+import entities.EntitiesData;
 import entities.Entity;
 import entities.EntityFactory;
 
@@ -23,6 +24,7 @@ import starling.events.Event;
 import starling.utils.AssetManager;
 
 import ui.HudLayer;
+import ui.Shop;
 
 public class Game extends Sprite {
 
@@ -40,8 +42,10 @@ public class Game extends Sprite {
     private var _gsm:GameStateMachine;
     private var _corePlayerOne:Entity;
     private var _corePlayerTwo:Entity;
-    private var _player:String;
+    private var _player:Player;
     private var _entitiesToDestroy:Array;
+    private var _hudLayer:HudLayer;
+    private var _shop:Shop;
 
     public function Game() {
 
@@ -95,6 +99,8 @@ public class Game extends Sprite {
         _entitiesSubGroups["shootablePlayerOneEntities"] = new Vector.<Entity>;
         _entitiesSubGroups["shootablePlayerTwoEntities"] = new Vector.<Entity>;
 
+        _player = new Player();
+
         _net = new NetConnect();
 
         if (ONLINE) {
@@ -104,7 +110,11 @@ public class Game extends Sprite {
             //onPlayerFound();
         }
 
-        addChild(HudLayer.getInstance());
+        _hudLayer = HudLayer.getInstance();
+        addChild(_hudLayer);
+
+        _shop = Shop.getInstance();
+        addChild(_shop);
 
         initStateMachine();
 
@@ -178,7 +188,7 @@ public class Game extends Sprite {
 
         if(player == "playerOne"){
 
-            if(_player == "playerOne"){
+            if(_player.getPlayerName() == "playerOne"){
                 _gsm.goTo(GameStateMachine.ENEMY_TURN);
             }
             else {
@@ -194,7 +204,7 @@ public class Game extends Sprite {
 
     public function onPlayTimeEnded():void {
 
-        if(_player == "playerOne"){
+        if(_player.getPlayerName() == "playerOne"){
             _gsm.goTo(GameStateMachine.MY_TURN);
         }
         else {
@@ -211,7 +221,7 @@ public class Game extends Sprite {
 
         createEntity(message.data.type, message.data.owner, new Point(reflectedPositionX, reflectedPositionY), false);
 
-        if(message.data.type == "core"){
+        if(message.data.type == EntitiesData.CORE){
             HudLayer.getInstance().setEnemyCorePosition(new Point(reflectedPositionX, reflectedPositionY));
         }
 
@@ -222,14 +232,14 @@ public class Game extends Sprite {
         //TODO remove when server is implemented
         MM_ORDER::player_one{
 
-            _player = "playerOne";
+            _player.setPlayerName("playerOne");
             _gsm.goTo(GameStateMachine.MY_TURN);
 
         }
 
         MM_ORDER::player_two{
 
-            _player = "playerTwo";
+            _player.setPlayerName("playerTwo");
             _gsm.goTo(GameStateMachine.ENEMY_TURN);
         }
 
@@ -242,7 +252,7 @@ public class Game extends Sprite {
 
     private function addCore():void {
 
-        _corePlayerOne = createEntity("core", _player, new Point(stage.stageWidth / 2, stage.stageHeight * 0.9), true);
+        _corePlayerOne = createEntity(EntitiesData.CORE, _player.getPlayerName(), new Point(stage.stageWidth / 2, stage.stageHeight * 0.9), true);
 
     }
 
@@ -305,24 +315,17 @@ public class Game extends Sprite {
         return _entities;
     }
 
-    public function getPlayer():String {
+    public function getPlayerName():String {
 
-        return _player;
-
-    }
-
-    public function getOppositePlayer():String {
-
-        return _player == "playerOne" ? "playerTwo" : "playerOne";
+        return _player.getPlayerName();
 
     }
 
-    public function getEntityOppositePlayer(owner:String):String {
+    public function getOppositePlayerName():String {
 
-        return owner == "playerOne" ? "playerTwo" : "playerOne";
+        return _player.getPlayerName() == "playerOne" ? "playerTwo" : "playerOne";
 
     }
-
 
     public function addToDestroy(entity:Entity):void {
 
@@ -352,7 +355,9 @@ public class Game extends Sprite {
 
     }
 
-
+    public function getPlayer():Player {
+        return _player;
+    }
 
 
 

@@ -1,17 +1,15 @@
 package gameLogic {
-import entities.Entity;
 import entities.Spawner;
 
-import flash.geom.Point;
+import flash.ui.Keyboard;
 
 import net.NetConnect;
 
+import starling.events.Event;
 import starling.events.KeyboardEvent;
-import starling.events.Touch;
-import starling.events.TouchEvent;
-import starling.events.TouchPhase;
 
 import ui.HudLayer;
+import ui.Shop;
 
 public class GLMyTurn implements IGameLogic{
 
@@ -19,13 +17,18 @@ public class GLMyTurn implements IGameLogic{
     private var _currentEntity:Spawner;
     private var _buildingPath:Boolean;
     private var _stateName:int;
+    private var _shop:Shop;
 
     public function GLMyTurn() {
 
         _stateName = GameStateMachine.MY_TURN;
         _game = Game.getInstance();
+        _shop = Shop.getInstance();
+        _shop.addEventListener("entityPlaced", onEntityPlaced);
 
     }
+
+
 
     public function getStateName():int {
         return _stateName;
@@ -33,46 +36,25 @@ public class GLMyTurn implements IGameLogic{
 
     public function endTurn():void {
 
-        _game.removeEventListener(TouchEvent.TOUCH, onCreateEntityOnClick);
+        Shop.getInstance().deactivateShop();
         _game.removeEventListener(KeyboardEvent.KEY_UP, finishTurn);
+        HudLayer.getInstance().showTurnAid(false);
 
     }
 
     public function startTurn():void {
 
-        _game.addEventListener(TouchEvent.TOUCH, onCreateEntityOnClick);
+        Shop.getInstance().activateShop();
         _game.addEventListener(KeyboardEvent.KEY_UP, finishTurn);
+        HudLayer.getInstance().showTurnAid(true);
+        Game.getInstance().getPlayer().updateCredits(10);
 
     }
 
-    private function onCreateEntityOnClick(e:TouchEvent):void {
+    private function onEntityPlaced(e:Event, data:Object):void {
 
-        if(_buildingPath){
-            return;
-        }
+        showPath(Spawner(_game.createEntity(data.entityName, _game.getPlayerName(), data.position, true)));
 
-        var began:Touch = e.getTouch(_game, TouchPhase.BEGAN);
-
-        if(began){
-
-            //TODO integrate with visual UI
-            if(began.globalY <= _game.stage.stageHeight / 2){
-                return;
-            }
-
-            _buildingPath = true;
-            //TODO remove this and implement it in the UI
-            if(processCost()){
-
-                showPath(Spawner(_game.createEntity("SMT1", _game.getPlayer(), new Point(began.globalX, began.globalY), true)));
-
-            }
-        }
-
-    }
-
-    private function processCost():Boolean {
-        return true;
     }
 
     private function showPath(entity:Spawner):void {
@@ -94,8 +76,12 @@ public class GLMyTurn implements IGameLogic{
 
     private function finishTurn(e:KeyboardEvent):void {
 
-        _game.sendMessage({type: "turnEnded", data: {player: _game.getPlayer()}});
-        _game.onTurnEnded(_game.getPlayer());
+        if(e.keyCode == Keyboard.SPACE){
+
+            _game.sendMessage({type: "turnEnded", data: {player: _game.getPlayerName()}});
+            _game.onTurnEnded(_game.getPlayerName());
+
+        }
 
     }
 

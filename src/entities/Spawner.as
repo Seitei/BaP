@@ -1,6 +1,6 @@
 package entities {
 
-public class Spawner extends Entity {
+public class Spawner extends Entity implements IBuyable{
 
     private var _maxUnits:int = 5;
     private var _spawnedUnits:int;
@@ -43,6 +43,10 @@ public class Spawner extends Entity {
             _spawnedUnits ++;
 
         }
+    }
+
+    public function getPrice():Number {
+        return _price;
     }
 
     public function unitDestroyed(unit:Unit):void {

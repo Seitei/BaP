@@ -59,7 +59,7 @@ public class Entity{
     public function setOwner(owner:String):void {
 
         _owner = owner;
-        Image(_visual).color = _owner == Game.getInstance().getPlayer() ? Color.GREEN : Color.RED;
+        Image(_visual).color = _owner == Game.getInstance().getPlayerName() ? Color.GREEN : Color.RED;
 
     }
 

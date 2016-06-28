@@ -13,6 +13,7 @@ public class EntitiesData {
     public static const RANGE:String = "range";
     public static const SPEED:String = "speed";
     public static const DAMAGE:String = "damage";
+    public static const CREDITS_RATE:String = "creditsRate";
 
     public static const CORE:String = "CORE";
     public static const SMT1:String = "SMT1";
@@ -21,6 +22,8 @@ public class EntitiesData {
     public static const MT2:String = "MT2";
     public static const MT1Bullet:String = "MT1Bullet";
     public static const MT2Bullet:String = "MT2Bullet";
+    public static const CB1:String = "creditsBooster1";
+    public static const CB2:String = "creditsBooster2";
 
 
 
@@ -61,7 +64,7 @@ public class EntitiesData {
 
     data[MT1][HITPOINTS]       = 20;
     data[MT1][SHOOT_RATE]      = 1;
-    data[MT1][BULLET]           = MT1Bullet;
+    data[MT1][BULLET]          = MT1Bullet;
     data[MT1][RANGE]           = 35;
     data[MT1][SPEED]           = 1;
 
@@ -69,7 +72,7 @@ public class EntitiesData {
 
     data[MT2][HITPOINTS]       = 50;
     data[MT2][SHOOT_RATE]      = 2;
-    data[MT2][BULLET]           = MT2Bullet;
+    data[MT2][BULLET]          = MT2Bullet;
     data[MT2][RANGE]           = 25;
     data[MT2][SPEED]           = 2;
 
@@ -88,6 +91,25 @@ public class EntitiesData {
 
     data[MT2Bullet][SPEED]           = 1;
     data[MT2Bullet][DAMAGE]          = 22;
+
+
+    ///////////// SUPPORT /////////////
+
+
+    data[CB1] = new Dictionary();
+
+    data[CB1][HITPOINTS]           = 70;
+    data[CB1][PRICE]               = 13;
+    data[CB1][CREDITS_RATE]        = 2;
+
+
+    data[CB2] = new Dictionary();
+
+    data[CB2][HITPOINTS]           = 90;
+    data[CB2][PRICE]               = 20;
+    data[CB2][CREDITS_RATE]        = 4;
+
+
 
 
 

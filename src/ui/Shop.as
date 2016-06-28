@@ -40,11 +40,19 @@ public class Shop extends Sprite{
         switch(e.keyCode){
 
             case Keyboard.Q:
-                entityName = "SMT1";
+                entityName = EntitiesData.SMT1;
                 break;
 
             case Keyboard.W:
-                entityName = "SMT2";
+                entityName = EntitiesData.SMT2;
+                break;
+
+            case Keyboard.Z:
+                entityName = EntitiesData.CB1;
+                break;
+
+            case Keyboard.X:
+                entityName = EntitiesData.CB2;
                 break;
 
         }
@@ -63,6 +71,9 @@ public class Shop extends Sprite{
 
         if(checkPrice(entityName)){
             displayEntity(entityName);
+        }
+        else {
+            UIElements.getInstance().showRed();
         }
 
     }
@@ -141,7 +152,6 @@ public class Shop extends Sprite{
 
     }
 
-
     public function activateShop():void {
 
         _game.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
@@ -153,17 +163,6 @@ public class Shop extends Sprite{
         _game.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public static function getInstance():Shop {
 

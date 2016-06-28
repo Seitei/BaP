@@ -2,6 +2,8 @@ package {
 
 import starling.display.Sprite;
 
+import ui.UIElements;
+
 public class Player extends Sprite {
 
     private var _playerName:String;
@@ -25,6 +27,7 @@ public class Player extends Sprite {
 
     public function updateCredits(value:int):void {
         _credits += value;
+        UIElements.getInstance().updateCredits(value);
     }
 
 

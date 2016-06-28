@@ -18,26 +18,32 @@ public class EntityFactory {
         //TODO eventually, obtain entities values from the server
         switch(entityName){
 
-            case "CORE":
+            case EntitiesData.CORE:
                 entity = new Core(id, entityName, _data[EntitiesData.HITPOINTS]);
                 break;
 
-            case "SMT1":
-            case "SMT2":
+            case EntitiesData.SMT1:
+            case EntitiesData.SMT2:
 
                 entity = new Spawner(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.MAX_UNITS], _data[EntitiesData.SPAWN_RATE], _data[EntitiesData.ENTITY_TO_SPAWN], _data[EntitiesData.PRICE]);
                 break;
 
-            case "MT1":
-            case "MT2":
+            case EntitiesData.MT1:
+            case EntitiesData.MT2:
 
                 entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
                 break;
 
-            case "MT1Bullet":
-            case "MT2Bullet":
+            case EntitiesData.MT1Bullet:
+            case EntitiesData.MT2Bullet:
 
                 entity = new Bullet(id, entityName, _data[EntitiesData.SPEED], _data[EntitiesData.DAMAGE]);
+                break;
+
+            case EntitiesData.CB1:
+            case EntitiesData.CB2:
+
+                entity = new CreditsBooster(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.PRICE], _data[EntitiesData.CREDITS_RATE]);
                 break;
 
             default: throw new Error("WTF?");

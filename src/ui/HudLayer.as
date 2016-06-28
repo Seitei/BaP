@@ -196,25 +196,6 @@ public class HudLayer extends Sprite{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static function getInstance():HudLayer {
 
         if(!_instance){

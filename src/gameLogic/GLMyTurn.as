@@ -1,4 +1,11 @@
 package gameLogic {
+import entities.Entity;
+import entities.IExecuteOnTurnStart;
+import entities.ISpawner;
+import entities.ISpawner;
+import entities.ISpawner;
+import entities.ISpawner;
+import entities.ISpawner;
 import entities.Spawner;
 
 import flash.ui.Keyboard;
@@ -14,10 +21,11 @@ import ui.Shop;
 public class GLMyTurn implements IGameLogic{
 
     private var _game:Game;
-    private var _currentEntity:Spawner;
+    private var _currentEntity:Entity;
     private var _buildingPath:Boolean;
     private var _stateName:int;
     private var _shop:Shop;
+    private var _entities:Vector.<Entity>;
 
     public function GLMyTurn() {
 
@@ -25,6 +33,7 @@ public class GLMyTurn implements IGameLogic{
         _game = Game.getInstance();
         _shop = Shop.getInstance();
         _shop.addEventListener("entityPlaced", onEntityPlaced);
+        _entities = _game.getEntities();
 
     }
 
@@ -48,16 +57,32 @@ public class GLMyTurn implements IGameLogic{
         _game.addEventListener(KeyboardEvent.KEY_UP, finishTurn);
         HudLayer.getInstance().showTurnAid(true);
         Game.getInstance().getPlayer().updateCredits(10);
+        checkEntitiesProc();
 
+    }
+
+    private function checkEntitiesProc():void {
+
+        for (var i:int = 0; i < _entities.length; i++) {
+
+            if(_entities[i] is IExecuteOnTurnStart){
+                IExecuteOnTurnStart(_entities[i]).executeOnTurnStart();
+            }
+
+        }
     }
 
     private function onEntityPlaced(e:Event, data:Object):void {
 
-        showPath(Spawner(_game.createEntity(data.entityName, _game.getPlayerName(), data.position, true)));
+        var entity:Entity = _game.createEntity(data.entityName, _game.getPlayerName(), data.position, true);
+
+        if(entity is ISpawner){
+            showPath(_game.createEntity(data.entityName, _game.getPlayerName(), data.position, true));
+        }
 
     }
 
-    private function showPath(entity:Spawner):void {
+    private function showPath(entity:Entity):void {
 
         _currentEntity = entity;
         HudLayer.getInstance().beginPath(entity, onPathFinished);
@@ -67,7 +92,7 @@ public class GLMyTurn implements IGameLogic{
     private function onPathFinished(waypoints:Array):void {
 
         _buildingPath = false;
-        _currentEntity.setWayPoints(waypoints);
+        ISpawner(_currentEntity).setWayPoints(waypoints);
 
         _game.sendMessage({type: NetConnect.UPDATE_ENTITY_DATA, data: {id: _currentEntity.getId(), params: {wayPoints: waypoints}}});
 

@@ -25,6 +25,7 @@ import starling.utils.AssetManager;
 
 import ui.HudLayer;
 import ui.Shop;
+import ui.UIElements;
 
 public class Game extends Sprite {
 
@@ -46,6 +47,7 @@ public class Game extends Sprite {
     private var _entitiesToDestroy:Array;
     private var _hudLayer:HudLayer;
     private var _shop:Shop;
+    private var _uiElements:UIElements;
 
     public function Game() {
 
@@ -115,6 +117,9 @@ public class Game extends Sprite {
 
         _shop = Shop.getInstance();
         addChild(_shop);
+
+        _uiElements = UIElements.getInstance();
+        addChild(_uiElements);
 
         initStateMachine();
 

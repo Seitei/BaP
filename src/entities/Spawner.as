@@ -1,6 +1,6 @@
 package entities {
 
-public class Spawner extends Entity implements IBuyable{
+public class Spawner extends Entity implements IBuyable, ISpawner{
 
     private var _maxUnits:int = 5;
     private var _spawnedUnits:int;
@@ -24,7 +24,7 @@ public class Spawner extends Entity implements IBuyable{
 
     }
 
-    private function spawn():void {
+    public function spawn():void {
 
         if(_maxUnits == _spawnedUnits){
             return;

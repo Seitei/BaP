@@ -33,7 +33,6 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
         _spawnCounter ++;
 
         if(_spawnCounter == _spawnRate * 60){
-
             var unit:Unit = Unit(Game.getInstance().createEntity(_entityToSpawn, _owner, getPosition(), false));
             unit.setWayPoints(_wayPoints);
             unit.setSpawner(this);

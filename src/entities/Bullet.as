@@ -29,7 +29,7 @@ public class Bullet extends Entity {
 
     private function move():void {
 
-        if(_distanceWalked >= _distanceToTarget){
+        if(_distanceWalked >= _distanceToTarget - _currentTarget.entitySize){
 
             _currentTarget.updateHP(-_damage);
             destroy();

@@ -14,6 +14,7 @@ public class EntityFactory {
         var id:int = owner == "playerOne" ? 100000 : 200000;
         id += ++_autoIncrement;
         _data = EntitiesData.data[entityName];
+        //trace(id, entityName);
 
         //TODO eventually, obtain entities values from the server
         switch(entityName){
@@ -33,6 +34,8 @@ public class EntityFactory {
 
                 entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
                 break;
+
+
 
             case EntitiesData.MT1Bullet:
             case EntitiesData.MT2Bullet:

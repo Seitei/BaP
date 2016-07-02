@@ -25,6 +25,8 @@ public class EntitiesData {
     public static const CB1:String = "creditsBooster1";
     public static const CB2:String = "creditsBooster2";
 
+    //to experiment different look & feels
+    public static const ENTITIES_SCALE:Number = 0.65;
 
 
 

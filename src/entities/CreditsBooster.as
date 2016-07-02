@@ -21,7 +21,11 @@ public class CreditsBooster extends Entity implements IExecuteOnTurnStart{
     }
 
     public function executeOnTurnStart():void {
-        Game.getInstance().getPlayer().updateCredits(_creditsRate);
+
+        if(_owner == Game.getInstance().getPlayerName()){
+            Game.getInstance().getPlayer().updateCredits(_creditsRate);
+        }
+
     }
 
 

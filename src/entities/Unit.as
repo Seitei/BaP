@@ -137,7 +137,15 @@ public class Unit extends Entity {
 
         _distanceIncrement = Math.sqrt((_incrementX * _incrementX) + ( _incrementY * _incrementY));
 
+        setRotation(rotation + 90 * Math.PI / 180);
+
     }
+
+    private function setRotation(rotation:Number):void {
+        _visual.rotation = rotation;
+    }
+
+
 
     public function setWayPoints(array:Array):void {
         _wayPoints = array;

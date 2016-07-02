@@ -2,11 +2,6 @@ package gameLogic {
 import entities.Entity;
 import entities.IExecuteOnTurnStart;
 import entities.ISpawner;
-import entities.ISpawner;
-import entities.ISpawner;
-import entities.ISpawner;
-import entities.ISpawner;
-import entities.Spawner;
 
 import flash.ui.Keyboard;
 
@@ -26,6 +21,7 @@ public class GLMyTurn implements IGameLogic{
     private var _stateName:int;
     private var _shop:Shop;
     private var _entities:Vector.<Entity>;
+    private var _executeOnTurnStartEntities:Vector.<IExecuteOnTurnStart>;
 
     public function GLMyTurn() {
 
@@ -34,6 +30,7 @@ public class GLMyTurn implements IGameLogic{
         _shop = Shop.getInstance();
         _shop.addEventListener("entityPlaced", onEntityPlaced);
         _entities = _game.getEntities();
+        _executeOnTurnStartEntities = new <IExecuteOnTurnStart>[];
 
     }
 
@@ -57,17 +54,15 @@ public class GLMyTurn implements IGameLogic{
         _game.addEventListener(KeyboardEvent.KEY_UP, finishTurn);
         HudLayer.getInstance().showTurnAid(true);
         Game.getInstance().getPlayer().updateCredits(10);
-        checkEntitiesProc();
+        executeOnTurnStartEntities();
 
     }
 
-    private function checkEntitiesProc():void {
+    private function executeOnTurnStartEntities():void {
 
-        for (var i:int = 0; i < _entities.length; i++) {
+        for (var i:int = 0; i < _executeOnTurnStartEntities.length; i++) {
 
-            if(_entities[i] is IExecuteOnTurnStart){
-                IExecuteOnTurnStart(_entities[i]).executeOnTurnStart();
-            }
+            _executeOnTurnStartEntities[i].executeOnTurnStart();
 
         }
     }
@@ -76,8 +71,12 @@ public class GLMyTurn implements IGameLogic{
 
         var entity:Entity = _game.createEntity(data.entityName, _game.getPlayerName(), data.position, true);
 
+        if(entity is IExecuteOnTurnStart){
+            _executeOnTurnStartEntities.push(entity);
+        }
+
         if(entity is ISpawner){
-            showPath(_game.createEntity(data.entityName, _game.getPlayerName(), data.position, true));
+            showPath(entity);
         }
 
     }

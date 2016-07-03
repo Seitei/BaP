@@ -1,6 +1,6 @@
 package entities {
 
-public class Bullet extends Entity {
+public class NormalBullet extends Entity implements IBullet {
 
     private var _distanceIncrement:Number;
     private var _incrementX:Number;
@@ -11,20 +11,23 @@ public class Bullet extends Entity {
     private var _currentTarget:Entity;
     private var _damage:Number;
 
-    public function Bullet(id:int, entityName:String, speed:Number, damage:Number) {
+    public function NormalBullet(id:int, entityName:String) {
 
         super(id, "bullet", entityName);
 
-        _speed = speed;
-        _damage = damage;
-
     }
 
-    public function setCurrentTarget(entity:Entity):void {
+    public function setDamage(value:Number):void {
+        _damage = value;
+    }
 
-        _currentTarget = entity;
+    public function setSpeed(value:Number):void {
+        _speed = value;
+    }
+
+    public function setTarget(value:Entity):void {
+        _currentTarget = value;
         calculatePath();
-
     }
 
     private function move():void {

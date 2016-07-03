@@ -1,12 +1,11 @@
 package entities {
-import starling.utils.Color;
-
 public class Unit extends Entity {
 
     private var _wayPoints:Array;
     private var _counter:int;
     private var _shootRate:Number;
     private var _bullet:String;
+    private var _damage:Number;
     private var _currentTarget:Entity;
     private var _shooting:Boolean;
     private var _shootableEnemyEntities:Vector.<Entity>;
@@ -23,13 +22,14 @@ public class Unit extends Entity {
     private var _spawner:Spawner;
 
 
-    public function Unit(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, range:Number, speed:Number) {
+    public function Unit(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, damage:Number, range:Number, speed:Number) {
 
         super(id, "unit", entityName);
 
         _shootRate = shootRate;
         _bullet = bullet;
         _range = range;
+        _damage = damage;
         _speed = speed;
         _hitPoints = hitPoints;
 
@@ -45,7 +45,10 @@ public class Unit extends Entity {
 
         if(_counter >= _shootRate * 60){
 
-            Bullet(Game.getInstance().createEntity(_bullet, _owner, getPosition(), false)).setCurrentTarget(_currentTarget);
+            var entity:Entity = Game.getInstance().createEntity(_bullet, _owner, getPosition(), false);
+            IBullet(entity).setDamage(_damage);
+            IBullet(entity).setSpeed(_speed);
+            IBullet(entity).setTarget(_currentTarget);
             _counter = 0;
 
         }

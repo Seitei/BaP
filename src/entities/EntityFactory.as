@@ -16,7 +16,6 @@ public class EntityFactory {
         _data = EntitiesData.data[entityName];
         //trace(id, entityName);
 
-        //TODO eventually, obtain entities values from the server
         switch(entityName){
 
             case EntitiesData.CORE:
@@ -32,15 +31,14 @@ public class EntityFactory {
             case EntitiesData.MT1:
             case EntitiesData.MT2:
 
-                entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
+                entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.DAMAGE], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
                 break;
 
 
 
-            case EntitiesData.MT1Bullet:
-            case EntitiesData.MT2Bullet:
+            case EntitiesData.NORMAL_BULLET:
 
-                entity = new Bullet(id, entityName, _data[EntitiesData.SPEED], _data[EntitiesData.DAMAGE]);
+                entity = new NormalBullet(id, entityName);
                 break;
 
             case EntitiesData.CB1:

@@ -22,6 +22,7 @@ public class Shop extends Sprite{
     private var _entityToPlace:Image;
     private var _disabled:Boolean;
     private var _entityName:String;
+    private var _positioning:Boolean;
 
     public function Shop() {
 
@@ -34,6 +35,15 @@ public class Shop extends Sprite{
     }
 
     private function onKeyUp(e:KeyboardEvent):void {
+
+        if(e.keyCode == Keyboard.ESCAPE){
+            cancel();
+            return;
+        }
+
+        if(_positioning){
+            return;
+        }
 
         var entityName:String;
 
@@ -66,10 +76,18 @@ public class Shop extends Sprite{
 
     }
 
+    private function cancel():void {
+        _positioning = false;
+        _entityToPlace.visible = false;
+        Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
+
+    }
+
 
     private function tryEntity(entityName:String):void {
 
         if(checkPrice(entityName)){
+            _positioning = true;
             displayEntity(entityName);
         }
         else {
@@ -123,10 +141,12 @@ public class Shop extends Sprite{
                 return;
             }
 
+            _positioning = false;
             _entityToPlace.visible = false;
             _game.getPlayer().updateCredits(-EntitiesData.data[_entityName][EntitiesData.PRICE]);
             dispatchEventWith("entityPlaced", false, {entityName: _entityName, position: new Point(_entityToPlace.x, _entityToPlace.y)});
             Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
+            deactivateShop();
         }
 
 

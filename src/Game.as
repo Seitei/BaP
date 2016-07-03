@@ -17,6 +17,7 @@ import gameLogic.GLPlay;
 import gameLogic.GameStateMachine;
 
 import net.NetConnect;
+import net.ServerConnect;
 
 import starling.display.Image;
 import starling.display.Sprite;
@@ -234,22 +235,18 @@ public class Game extends Sprite {
 
     private function onPlayerFound():void {
 
-        //TODO remove when server is implemented
-        MM_ORDER::player_one{
+        // TODO get player number from player instance
+        if(_net.getPlayerNumber() == 1){
 
             _player.setPlayerName("playerOne");
             _gsm.goTo(GameStateMachine.MY_TURN);
 
-        }
-
-        MM_ORDER::player_two{
-
+        } else {
             _player.setPlayerName("playerTwo");
             _gsm.goTo(GameStateMachine.ENEMY_TURN);
         }
 
         addCore();
-
     }
 
 

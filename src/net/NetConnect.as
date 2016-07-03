@@ -1,9 +1,12 @@
 package net {
 
+import flash.desktop.NativeApplication;
 import flash.events.NetStatusEvent;
 import flash.net.GroupSpecifier;
 import flash.net.NetConnection;
 import flash.net.NetGroup;
+
+import starling.core.Starling;
 
 import starling.events.EventDispatcher;
 
@@ -24,6 +27,7 @@ public class NetConnect extends EventDispatcher{
     private var _netGroup:NetGroup;
     private var _user:String;
     private var _connected:Boolean = false;
+    private var _playerNumber:int;
 
     public function NetConnect() {
 
@@ -61,14 +65,27 @@ public class NetConnect extends EventDispatcher{
 
     private function setupGroup():void{
 
-        var groupSpec:GroupSpecifier = new GroupSpecifier("myGroup/g1");
-        groupSpec.serverChannelEnabled = true;
-        groupSpec.postingEnabled = true;
+        var id:int = Math.random() * int.MAX_VALUE;
+        var playerName:String = "player" + id;
 
-        _netGroup = new NetGroup(_nc,groupSpec.groupspecWithAuthorizations());
-        _netGroup.addEventListener(NetStatusEvent.NET_STATUS,netStatus);
+        var serverConnect:ServerConnect = new ServerConnect();
+        serverConnect.match(playerName, function(data:String){
+            var result:Object = JSON.parse(data);
+            trace("[ServerConnect] GroupSpecifier: " + result.key.toString());
+            trace("[ServerConnect] Player slot: " + result.player_number.toString());
+            _playerNumber = parseInt(result.player_number.toString(), 10);
 
-        _user = "user" + Math.round(Math.random() * 10000);
+            var groupSpec:GroupSpecifier = new GroupSpecifier(result.key.toString());
+            groupSpec.serverChannelEnabled = true;
+            groupSpec.postingEnabled = true;
+
+            _netGroup = new NetGroup(_nc,groupSpec.groupspecWithAuthorizations());
+            _netGroup.addEventListener(NetStatusEvent.NET_STATUS,netStatus);
+
+            _user = "user" + result.player_number.toString();
+        });
+
+
 
     }
 
@@ -89,7 +106,9 @@ public class NetConnect extends EventDispatcher{
 
     }
 
-
+    public function getPlayerNumber():int {
+        return _playerNumber;
+    }
 
 
 

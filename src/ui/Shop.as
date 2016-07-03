@@ -65,6 +65,14 @@ public class Shop extends Sprite{
                 entityName = EntitiesData.CB2;
                 break;
 
+            case Keyboard.A:
+                entityName = EntitiesData.TOWERT1;
+                break;
+
+            case Keyboard.S:
+                entityName = EntitiesData.TOWERT2;
+                break;
+
         }
 
         if(entityName){

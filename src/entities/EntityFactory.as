@@ -31,7 +31,7 @@ public class EntityFactory {
             case EntitiesData.MT1:
             case EntitiesData.MT2:
 
-                entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.DAMAGE], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
+                entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.BULLET_SPEED], _data[EntitiesData.DAMAGE], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
                 break;
 
 
@@ -45,6 +45,12 @@ public class EntityFactory {
             case EntitiesData.CB2:
 
                 entity = new CreditsBooster(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.PRICE], _data[EntitiesData.CREDITS_RATE]);
+                break;
+
+            case EntitiesData.TOWERT1:
+            case EntitiesData.TOWERT2:
+
+                entity = new Tower(id, entityName, _data[EntitiesData.PRICE], _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.BULLET_SPEED], _data[EntitiesData.DAMAGE], _data[EntitiesData.RANGE]);
                 break;
 
             default: throw new Error("WTF?");

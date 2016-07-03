@@ -1,6 +1,6 @@
 package entities {
 
-public class Tower extends Entity {
+public class Tower extends Entity implements IBuyable{
 
     private var _counter:int;
     private var _shootRate:Number;
@@ -12,18 +12,26 @@ public class Tower extends Entity {
     private var _positionXHelper:Number;
     private var _positionYHelper:Number;
     private var _damage:Number;
+    private var _price:Number;
+    private var _bulletSpeed:Number;
 
 
-    public function Tower(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, damage:Number, range:Number) {
+    public function Tower(id:int, entityName:String, price:Number, hitPoints: int, shootRate:Number, bullet:String, bulletSpeed:Number, damage:Number, range:Number) {
 
         super(id, "unit", entityName);
 
+        _price = price;
         _shootRate = shootRate;
         _bullet = bullet;
         _range = range;
         _damage = damage;
+        _bulletSpeed = bulletSpeed;
         _hitPoints = hitPoints;
 
+    }
+
+    public function getPrice():Number {
+        return _price;
     }
 
     private function executeShot():void {
@@ -33,8 +41,9 @@ public class Tower extends Entity {
         if(_counter >= _shootRate * 60){
 
             var entity:Entity = Game.getInstance().createEntity(_bullet, _owner, getPosition(), false);
-            IBullet(entity).setTarget(_currentTarget);
             IBullet(entity).setDamage(_damage);
+            IBullet(entity).setSpeed(_bulletSpeed);
+            IBullet(entity).setTarget(_currentTarget);
 
             _counter = 0;
 

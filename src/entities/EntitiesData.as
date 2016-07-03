@@ -14,6 +14,7 @@ public class EntitiesData {
     public static const BULLET:String = "bullet";
     public static const RANGE:String = "range";
     public static const SPEED:String = "speed";
+    public static const BULLET_SPEED:String = "bullet_speed";
     public static const DAMAGE:String = "damage";
     public static const CREDITS_RATE:String = "creditsRate";
 
@@ -27,13 +28,13 @@ public class EntitiesData {
     public static const CB2:String = "CREDITS_BOOSTER2";
     public static const TOWERT1:String = "TOWERT1";
     public static const TOWERT2:String = "TOWERT2";
-
     //to experiment different look & feels
     public static const ENTITIES_SCALE:Number = 0.65;
 
 
 
     public static var data:Dictionary = new Dictionary();
+
 
 
     ///////////// CORE /////////////
@@ -73,6 +74,7 @@ public class EntitiesData {
     data[MT1][RANGE]           = 35;
     data[MT1][DAMAGE]          = 7;
     data[MT1][SPEED]           = 1;
+    data[MT1][BULLET_SPEED]    = 3;
 
     data[MT2] = new Dictionary();
 
@@ -82,6 +84,7 @@ public class EntitiesData {
     data[MT2][RANGE]           = 25;
     data[MT2][DAMAGE]          = 11;
     data[MT2][SPEED]           = 2;
+    data[MT1][BULLET_SPEED]    = 3;
 
 
 
@@ -109,16 +112,20 @@ public class EntitiesData {
     data[TOWERT1][HITPOINTS]           = 120;
     data[TOWERT1][PRICE]               = 7;
     data[TOWERT1][DAMAGE]              = 8;
-    data[TOWERT1][SHOOT_RATE]          = 4;
+    data[TOWERT1][BULLET]              = NORMAL_BULLET;
+    data[TOWERT1][SHOOT_RATE]          = 0.5;
     data[TOWERT1][RANGE]               = 50;
+    data[TOWERT1][BULLET_SPEED]        = 2;
 
     data[TOWERT2] = new Dictionary();
 
     data[TOWERT2][HITPOINTS]           = 220;
     data[TOWERT2][PRICE]               = 18;
+    data[TOWERT1][BULLET]              = NORMAL_BULLET;
     data[TOWERT2][DAMAGE]              = 11;
-    data[TOWERT2][SHOOT_RATE]          = 7;
+    data[TOWERT2][SHOOT_RATE]          = 0.2;
     data[TOWERT2][RANGE]               = 70;
+    data[TOWERT2][BULLET_SPEED]        = 2;
     
 
 

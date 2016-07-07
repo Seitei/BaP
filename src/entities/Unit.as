@@ -108,7 +108,7 @@ public class Unit extends Entity {
         _posX += _incrementX;
         _posY += _incrementY;
 
-        updateVisuals();
+        updateGraphics();
 
     }
 
@@ -147,7 +147,7 @@ public class Unit extends Entity {
     }
 
     private function setRotation(rotation:Number):void {
-        _visual.rotation = rotation;
+        _visual.getGraphics().rotation = rotation;
     }
 
 

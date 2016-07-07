@@ -1,36 +1,33 @@
 package ui {
 import entities.EntitiesData;
+import entities.Entity;
+import entities.EntityFactory;
 
 import flash.geom.Point;
 import flash.ui.Keyboard;
 
-import starling.display.Image;
-
 import starling.display.Sprite;
-
+import starling.events.EnterFrameEvent;
 import starling.events.KeyboardEvent;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
-import starling.textures.Texture;
-import starling.utils.Color;
 
 public class Shop extends Sprite{
 
     private static var _instance:Shop;
     private var _game:Game;
-    private var _entityToPlace:Image;
+    private var _entityToPlace:Entity;
     private var _disabled:Boolean;
     private var _entityName:String;
     private var _positioning:Boolean;
+    private var _helperPoint:Point;
 
     public function Shop() {
 
         _game = Game.getInstance();
-        _entityToPlace = new Image(Texture.empty(50, 50));
-        addChild(_entityToPlace);
-        _entityToPlace.alpha = 0.5;
-        _entityToPlace.visible = false;
+        _helperPoint = new Point();
+        Game.getInstance().addEventListener(TouchEvent.TOUCH, onPreTouch);
 
     }
 
@@ -75,19 +72,18 @@ public class Shop extends Sprite{
 
         }
 
-        if(entityName){
+        _entityName = entityName;
+        tryEntity(entityName);
 
-            _entityName = entityName;
-            tryEntity(entityName)
-
-        }
 
     }
 
     private function cancel():void {
+
         _positioning = false;
-        _entityToPlace.visible = false;
+        _entityToPlace.destroy();
         Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
+        Game.getInstance().addEventListener(TouchEvent.TOUCH, onPreTouch);
 
     }
 
@@ -106,20 +102,32 @@ public class Shop extends Sprite{
 
     private function displayEntity(entityName:String):void {
 
-        _entityToPlace.texture = ResourceManager.getAssetManager().getTexture(entityName);
-        _entityToPlace.visible = true;
-        _entityToPlace.color = Color.GREEN;
-        _entityToPlace.readjustSize();
-        _entityToPlace.pivotX = _entityToPlace.width / 2;
-        _entityToPlace.pivotY = _entityToPlace.height / 2;
-
         Game.getInstance().addEventListener(TouchEvent.TOUCH, onTouch);
+        _entityToPlace = EntityFactory.getInstance().createEntity(entityName, Game.getInstance().getPlayerName(), null, true);
+        _entityToPlace.setPreGraphicsPosition(_helperPoint);
+        addChild(_entityToPlace.getPreGraphics());
+        Game.getInstance().removeEventListener(TouchEvent.TOUCH, onPreTouch);
+
 
     }
 
     private function checkPrice(entityName:String):Boolean {
 
         return _game.getPlayer().getCredits() >= EntitiesData.data[entityName][EntitiesData.PRICE];
+
+    }
+
+    private function onPreTouch(e:TouchEvent):void {
+
+        var hover:Touch = e.getTouch(_game, TouchPhase.HOVER);
+
+        if(hover){
+
+            _helperPoint.x = hover.globalX;
+            _helperPoint.y = hover.globalY;
+
+        }
+
 
     }
 
@@ -130,8 +138,9 @@ public class Shop extends Sprite{
 
         if(hover){
 
-            _entityToPlace.x = hover.globalX;
-            _entityToPlace.y = hover.globalY;
+            _helperPoint.x = hover.globalX;
+            _helperPoint.y = hover.globalY;
+            _entityToPlace.setPreGraphicsPosition(_helperPoint);
 
             if(!_disabled && !checkPosition(hover.globalX, hover.globalY)){
                 disablePlacing();
@@ -150,11 +159,12 @@ public class Shop extends Sprite{
             }
 
             _positioning = false;
-            _entityToPlace.visible = false;
             _game.getPlayer().updateCredits(-EntitiesData.data[_entityName][EntitiesData.PRICE]);
-            dispatchEventWith("entityPlaced", false, {entityName: _entityName, position: new Point(_entityToPlace.x, _entityToPlace.y)});
+            dispatchEventWith("entityPlaced", false, {entityName: _entityName, position: _entityToPlace.getPosition()});
             Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
             deactivateShop();
+            _entityToPlace.destroy();
+
         }
 
 
@@ -163,14 +173,14 @@ public class Shop extends Sprite{
     private function disablePlacing():void {
 
         _disabled = true;
-        _entityToPlace.alpha = 0.2;
+        _entityToPlace.getVisual().disablePreGraphics();
 
     }
 
     private function enablePlacing():void {
 
         _disabled = false;
-        _entityToPlace.alpha = 0.5;
+        _entityToPlace.getVisual().enablePreGraphics();
 
     }
 

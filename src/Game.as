@@ -290,7 +290,7 @@ public class Game extends Sprite {
             }
         }
 
-        _entitiesLayer.addChild(entity.getVisual());
+        _entitiesLayer.addChild(entity.getGraphics());
 
         if(send){
             sendMessage({type: NetConnect.ENTITY_ADDED, data: {type: entity.getEntityName(), owner:entity.getOwner(), position:entity.getPosition()}});

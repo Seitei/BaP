@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="GraphicsExtension" type="flex">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/libs/Starling-Extension-Graphics-master/extension/src" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

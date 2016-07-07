@@ -1,15 +1,11 @@
 package net {
 
-import flash.desktop.NativeApplication;
 import flash.events.NetStatusEvent;
 import flash.net.GroupSpecifier;
 import flash.net.NetConnection;
 import flash.net.NetGroup;
 
-import starling.core.Starling;
-
 import starling.events.EventDispatcher;
-
 
 public class NetConnect extends EventDispatcher{
 
@@ -59,7 +55,7 @@ public class NetConnect extends EventDispatcher{
                 break;
         }
 
-        //trace(event.info.code);
+        trace(event.info.code);
 
     }
 

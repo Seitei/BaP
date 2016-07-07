@@ -3,15 +3,13 @@ package entities {
 import flash.geom.Point;
 
 import starling.display.DisplayObject;
-import starling.display.Image;
-import starling.utils.Color;
 
 public class Entity{
 
     private static const GREEN:uint = 0x0DFF00;
     protected var _id:int;
     protected var _entityType:String;
-    protected var _visual:DisplayObject;
+    protected var _visual:IVisuals;
     protected var _entityName:String;
     protected var _owner:String;
     protected var _posX:Number;
@@ -19,6 +17,8 @@ public class Entity{
     protected var _destroyed:Boolean;
     protected var _hitPoints:Number;
     protected var _entitySize:Number;
+    protected var _graphics:DisplayObject;
+    protected var _preGraphics:DisplayObject;
 
     public function Entity(id:int, entityType:String, entityName:String) {
 
@@ -26,13 +26,13 @@ public class Entity{
         _entityType = entityType;
         _entityName = entityName;
 
-        _visual = new Image(ResourceManager.getAssetManager().getTexture(entityName));
-        _visual.scaleX = _visual.scaleY = EntitiesData.ENTITIES_SCALE;
-        _visual.pivotX = _visual.width / 2;
-        _visual.pivotY = _visual.height / 2;
+    }
 
-        _entitySize = _visual.width;
-
+    public function buildVisuals(visuals:IVisuals):void {
+        _visual = visuals;
+        _visual.build(this);
+        _graphics = _visual.getGraphics();
+        _preGraphics = _visual.getPreGraphics();
     }
 
     public function getEntityType():String {
@@ -45,28 +45,47 @@ public class Entity{
 
     public function update():void {}
 
-    public function getVisual():DisplayObject {
+    public function getVisual():IVisuals {
         return _visual;
+    }
+
+    public function getGraphics():DisplayObject {
+        return _graphics;
+    }
+
+    public function getPreGraphics():DisplayObject {
+        return _preGraphics;
     }
 
     public function setPosition(position:Point):void {
         _posX = position.x;
         _posY = position.y;
-        updateVisuals();
+        updateGraphics();
     }
 
-    protected function updateVisuals():void {
-        _visual.x = _posX;
-        _visual.y = _posY;
+    public function setPreGraphicsPosition(position:Point):void {
+        _posX = position.x;
+        _posY = position.y;
+        updatePreGraphics();
+    }
+
+    protected function updateGraphics():void {
+        _graphics.x = _posX;
+        _graphics.y = _posY;
+    }
+
+    protected function updatePreGraphics():void {
+        _preGraphics.x = _posX;
+        _preGraphics.y = _posY;
     }
 
     public function setOwner(owner:String):void {
 
         _owner = owner;
-        Image(_visual).color = _owner == Game.getInstance().getPlayerName() ? GREEN : Color.RED;
+        _visual.setSide(owner);
 
         if(_owner != Game.getInstance().getPlayerName()){
-            _visual.rotation = Math.PI;
+            _graphics.rotation = Math.PI;
         }
     }
 
@@ -102,13 +121,20 @@ public class Entity{
 
         _destroyed = true;
         Game.getInstance().addToDestroy(this);
-        _visual.parent.removeChild(_visual);
+
+        if(_graphics.parent){
+            _graphics.parent.removeChild(_graphics);
+        }
+
+        if(_preGraphics.parent){
+            _preGraphics.parent.removeChild(_preGraphics);
+        }
 
     }
 
     public function debugVisuals(color:uint):void {
 
-        Image(_visual).color = color;
+        _visual.debug();
 
     }
 

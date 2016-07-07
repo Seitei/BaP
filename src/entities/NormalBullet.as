@@ -44,7 +44,7 @@ public class NormalBullet extends Entity implements IBullet {
         _posX += _incrementX;
         _posY += _incrementY;
 
-        updateVisuals();
+        updateGraphics();
 
     }
 

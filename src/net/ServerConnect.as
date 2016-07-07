@@ -1,7 +1,5 @@
-/**
- * Created by leandro on 2016-06-23.
- */
 package net {
+
 import flash.events.Event;
 import flash.events.EventDispatcher;
 import flash.events.HTTPStatusEvent;

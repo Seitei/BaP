@@ -65,7 +65,7 @@ public class NetConnect extends EventDispatcher{
         var playerName:String = "player" + id;
 
         var serverConnect:ServerConnect = new ServerConnect();
-        serverConnect.match(playerName, function(data:String){
+        serverConnect.match(playerName, function(data:String):void {
             var result:Object = JSON.parse(data);
             trace("[ServerConnect] GroupSpecifier: " + result.key.toString());
             trace("[ServerConnect] Player slot: " + result.player_number.toString());

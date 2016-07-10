@@ -7,7 +7,7 @@ import starling.display.DisplayObject;
 public class Entity{
 
     private static const GREEN:uint = 0x0DFF00;
-    protected var _id:int;
+    protected var _id:int = -1;
     protected var _entityType:String;
     protected var _visual:IVisuals;
     protected var _entityName:String;
@@ -120,7 +120,11 @@ public class Entity{
     public function destroy():void {
 
         _destroyed = true;
-        Game.getInstance().addToDestroy(this);
+
+        //dummy entities have no ID
+        if(_id != -1){
+            Game.getInstance().addToDestroy(this);
+        }
 
         if(_graphics.parent){
             _graphics.parent.removeChild(_graphics);

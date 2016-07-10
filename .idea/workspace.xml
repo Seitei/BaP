@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db774149-4b0d-4a59-88b2-a5d05ea14708" name="Default" comment="Look &amp; Feel part I">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/GraphicsExtension.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/entities/IVisuals.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/entities/SpawnerVisuals.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/entities/Visuals.as" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattlePlan/assets/MT1Bullet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattlePlan/assets/SMT1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/SMT1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/SMT2.png" afterPath="" />
+    <list default="true" id="db774149-4b0d-4a59-88b2-a5d05ea14708" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/WhiteLine.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/fill.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/spawner_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/spawner_bg_out_circle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/spawner_loader.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattlePlan/Main.swf" afterPath="$PROJECT_DIR$/out/production/BattlePlan/Main.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattlePlan/Main2.swf" afterPath="$PROJECT_DIR$/out/production/BattlePlan/Main2.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattlePlan/assets/MT1.png" afterPath="$PROJECT_DIR$/out/production/BattlePlan/assets/MT1.png" />
@@ -18,15 +14,18 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/MT1.png" afterPath="$PROJECT_DIR$/src/assets/MT1.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/Thumbs.db" afterPath="$PROJECT_DIR$/src/assets/Thumbs.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattlePlan.iml" afterPath="$PROJECT_DIR$/BattlePlan.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.as" afterPath="$PROJECT_DIR$/src/Game.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main-app.xml" afterPath="$PROJECT_DIR$/Main-app.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main-app2.xml" afterPath="$PROJECT_DIR$/Main-app2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattlePlan/Main-app.xml" afterPath="$PROJECT_DIR$/out/production/BattlePlan/Main-app.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattlePlan/Main-app2.xml" afterPath="$PROJECT_DIR$/out/production/BattlePlan/Main-app2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.as" afterPath="$PROJECT_DIR$/src/Main.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ResourceManager.as" afterPath="$PROJECT_DIR$/src/ResourceManager.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/Entity.as" afterPath="$PROJECT_DIR$/src/entities/Entity.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/EntityFactory.as" afterPath="$PROJECT_DIR$/src/entities/EntityFactory.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/NormalBullet.as" afterPath="$PROJECT_DIR$/src/entities/NormalBullet.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/Spawner.as" afterPath="$PROJECT_DIR$/src/entities/Spawner.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/Unit.as" afterPath="$PROJECT_DIR$/src/entities/Unit.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/SpawnerVisuals.as" afterPath="$PROJECT_DIR$/src/entities/SpawnerVisuals.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/Visuals.as" afterPath="$PROJECT_DIR$/src/entities/Visuals.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/NetConnect.as" afterPath="$PROJECT_DIR$/src/net/NetConnect.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/ServerConnect.as" afterPath="$PROJECT_DIR$/src/net/ServerConnect.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/Shop.as" afterPath="$PROJECT_DIR$/src/ui/Shop.as" />
     </list>
     <ignored path="BattlePlan.iws" />
@@ -50,14 +49,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Shop.as" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Shop.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/Shop.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.10981912">
-              <caret line="125" column="43" selection-start-line="125" selection-start-column="43" selection-end-line="125" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="167" column="31" selection-start-line="167" selection-start-column="31" selection-end-line="167" selection-end-column="31" />
               <folding>
                 <element signature="e#13#42#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GLMyTurn.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gameLogic/GLMyTurn.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,9 +85,21 @@
         <entry file="file://$PROJECT_DIR$/src/entities/Entity.as">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
               <folding>
                 <element signature="e#20#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EntityFactory.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entities/EntityFactory.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+              <folding>
+                <element signature="e#19#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/src/entities/Visuals.as">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="17" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="17" />
+              <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
               <folding>
                 <element signature="e#19#57#0" expanded="true" />
               </folding>
@@ -96,45 +117,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NormalBullet.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entities/NormalBullet.as">
+      <file leaf-file-name="SpawnerVisuals.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/entities/SpawnerVisuals.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="24" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntityFactory.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entities/EntityFactory.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.32945737">
+              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
               <folding>
-                <element signature="e#19#43#0" expanded="true" />
+                <element signature="e#20#54#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GLMyTurn.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gameLogic/GLMyTurn.as">
+      <file leaf-file-name="Spawner.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entities/Spawner.as">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpawnerVisuals.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entities/SpawnerVisuals.as">
+      <file leaf-file-name="ResourceManager.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ResourceManager.as">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+              <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
               <folding>
-                <element signature="e#20#50#0" expanded="true" />
+                <element signature="e#10#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,7 +155,7 @@
         <entry file="file://$PROJECT_DIR$/src/Game.as">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="177" column="76" selection-start-line="177" selection-start-column="76" selection-end-line="177" selection-end-column="76" />
+              <caret line="333" column="0" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
               <folding>
                 <element signature="e#11#40#0" expanded="true" />
               </folding>
@@ -174,9 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Main-app.xml" />
-        <option value="$PROJECT_DIR$/src/ResourceManager.as" />
-        <option value="$PROJECT_DIR$/Main-app2.xml" />
         <option value="$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/events/TouchPhase.as" />
         <option value="$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/core/Starling.as" />
         <option value="$PROJECT_DIR$/src/GameLogic.as" />
@@ -191,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/behaviors/Visuals.as" />
         <option value="$PROJECT_DIR$/src/behaviors/Spawn.as" />
         <option value="$PROJECT_DIR$/src/behaviors/Move.as" />
-        <option value="$PROJECT_DIR$/src/gameLogic/GLPlay.as" />
         <option value="$PROJECT_DIR$/src/entities/Core.as" />
         <option value="$PROJECT_DIR$/src/entities/IBuyable.as" />
         <option value="$PROJECT_DIR$/src/Player.as" />
@@ -201,24 +208,28 @@
         <option value="$PROJECT_DIR$/src/entities/IExecuteOnTurnStart.as" />
         <option value="$PROJECT_DIR$/src/entities/CreditsBooster.as" />
         <option value="$PROJECT_DIR$/src/gameLogic/GLMyTurn.as" />
-        <option value="$PROJECT_DIR$/src/Main.as" />
         <option value="$PROJECT_DIR$/src/entities/Bullet.as" />
         <option value="$PROJECT_DIR$/src/entities/IBullet.as" />
         <option value="$PROJECT_DIR$/src/entities/Tower.as" />
         <option value="$PROJECT_DIR$/src/entities/EntitiesData.as" />
         <option value="$PROJECT_DIR$/src/net/ServerConnect.as" />
-        <option value="$PROJECT_DIR$/src/net/NetConnect.as" />
         <option value="$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/utils/Color.as" />
-        <option value="$PROJECT_DIR$/src/entities/Spawner.as" />
-        <option value="$PROJECT_DIR$/src/entities/EntityFactory.as" />
-        <option value="$PROJECT_DIR$/src/entities/Visuals.as" />
         <option value="$PROJECT_DIR$/src/entities/IVisuals.as" />
-        <option value="$PROJECT_DIR$/src/Game.as" />
         <option value="$PROJECT_DIR$/src/entities/NormalBullet.as" />
         <option value="$PROJECT_DIR$/src/entities/Unit.as" />
-        <option value="$PROJECT_DIR$/src/entities/Entity.as" />
-        <option value="$PROJECT_DIR$/src/entities/SpawnerVisuals.as" />
+        <option value="$PROJECT_DIR$/src/Main.as" />
+        <option value="$PROJECT_DIR$/src/net/NetConnect.as" />
+        <option value="$PROJECT_DIR$/src/ResourceManager.as" />
         <option value="$PROJECT_DIR$/src/ui/Shop.as" />
+        <option value="$PROJECT_DIR$/Main-app.xml" />
+        <option value="$PROJECT_DIR$/Main-app2.xml" />
+        <option value="$PROJECT_DIR$/src/Game.as" />
+        <option value="$PROJECT_DIR$/src/entities/Visuals.as" />
+        <option value="$PROJECT_DIR$/src/entities/Spawner.as" />
+        <option value="$PROJECT_DIR$/src/gameLogic/GLPlay.as" />
+        <option value="$PROJECT_DIR$/src/entities/Entity.as" />
+        <option value="$PROJECT_DIR$/src/entities/EntityFactory.as" />
+        <option value="$PROJECT_DIR$/src/entities/SpawnerVisuals.as" />
       </list>
     </option>
   </component>
@@ -287,7 +298,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -412,8 +424,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -446,7 +457,7 @@
       <recent name="C:\Users\Pablo\Documents\BattlePlan\src\gameLogic" />
     </key>
   </component>
-  <component name="RunManager" selected="Flash App.BattlePlan Client 2">
+  <component name="RunManager" selected="Flash App.BattlePlan Client 1">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -980,7 +991,12 @@
       <workItem from="1467737187854" duration="612000" />
       <workItem from="1467822754038" duration="5428000" />
       <workItem from="1467828867976" duration="186000" />
-      <workItem from="1467911122828" duration="5808000" />
+      <workItem from="1467911122828" duration="5836000" />
+      <workItem from="1468060715041" duration="8397000" />
+      <workItem from="1468078396136" duration="899000" />
+      <workItem from="1468085074280" duration="1321000" />
+      <workItem from="1468163476746" duration="4155000" />
+      <workItem from="1468167651951" duration="3594000" />
     </task>
     <task id="LOCAL-00001" summary="Entities refactor.">
       <created>1466966119237</created>
@@ -1018,11 +1034,17 @@
       <option name="project" value="LOCAL" />
       <updated>1467548118527</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Look &amp; Feel part 2">
+      <created>1467916952603</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1467916952603</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189999000" />
+    <option name="totallyTimeSpent" value="208393000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -1041,6 +1063,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12864584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298969" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1052,7 +1075,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1073,11 +1095,12 @@
     <MESSAGE value="Look &amp; Feel part I" />
     <MESSAGE value="Some fixes and changes." />
     <MESSAGE value="Tower added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tower added." />
+    <MESSAGE value="Look &amp; Feel part 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Look &amp; Feel part 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="121" />
+      <option name="time" value="135" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1192,20 +1215,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main-app.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3188549">
-          <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main-app2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38164893">
-          <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/events/TouchPhase.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1224,13 +1233,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4228792">
           <caret line="833" column="149" selection-start-line="833" selection-start-column="149" selection-end-line="833" selection-end-column="149" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ResourceManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -1255,24 +1257,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entities/Core.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15374677">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/entities/IExecuteOnTurnStart.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gameLogic/GLPlay.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="40" selection-start-line="18" selection-start-column="6" selection-end-line="19" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1346,56 +1334,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/NetConnect.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39534885">
-          <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.032723773">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/utils/Color.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entities/Spawner.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/display/Image.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entities/IVisuals.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gameLogic/GLMyTurn.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1407,33 +1349,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.as">
+    <entry file="file://$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/events/EventDispatcher.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="177" column="76" selection-start-line="177" selection-start-column="76" selection-end-line="177" selection-end-column="76" />
-          <folding>
-            <element signature="e#11#40#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.3113695">
+          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entities/SpawnerVisuals.as">
+    <entry file="file://$PROJECT_DIR$/src/net/NetConnect.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding>
-            <element signature="e#20#50#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.30232558">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entities/Visuals.as">
+    <entry file="file://$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/utils/Color.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="17" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="17" />
-          <folding>
-            <element signature="e#19#57#0" expanded="true" />
-          </folding>
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1445,20 +1386,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/Starling-Framework-1.7/starling/src/starling/events/EventDispatcher.as">
+    <entry file="file://$PROJECT_DIR$/src/ResourceManager.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3113695">
-          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#10#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main-app2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35828876">
+          <caret line="104" column="29" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entities/EntityFactory.as">
+    <entry file="file://$PROJECT_DIR$/Main-app.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35828876">
+          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entities/IVisuals.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.123726346">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entities/Visuals.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+          <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
           <folding>
-            <element signature="e#19#43#0" expanded="true" />
+            <element signature="e#19#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entities/Core.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entities/Spawner.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gameLogic/GLPlay.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gameLogic/GLMyTurn.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/Shop.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="167" column="31" selection-start-line="167" selection-start-column="31" selection-end-line="167" selection-end-column="31" />
+          <folding>
+            <element signature="e#13#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1466,19 +1475,39 @@
     <entry file="file://$PROJECT_DIR$/src/entities/Entity.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
           <folding>
             <element signature="e#20#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/Shop.as">
+    <entry file="file://$PROJECT_DIR$/src/Game.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10981912">
-          <caret line="125" column="43" selection-start-line="125" selection-start-column="43" selection-end-line="125" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="333" column="0" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
           <folding>
-            <element signature="e#13#42#0" expanded="true" />
+            <element signature="e#11#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entities/EntityFactory.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="e#19#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entities/SpawnerVisuals.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32945737">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#20#54#0" expanded="true" />
           </folding>
         </state>
       </provider>

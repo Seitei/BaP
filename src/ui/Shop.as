@@ -72,8 +72,10 @@ public class Shop extends Sprite{
 
         }
 
-        _entityName = entityName;
-        tryEntity(entityName);
+        if(entityName){
+            _entityName = entityName;
+            tryEntity(entityName);
+        }
 
 
     }

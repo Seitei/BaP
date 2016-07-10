@@ -1,4 +1,6 @@
 package entities {
+import entities.SpawnerVisuals;
+
 public class Spawner extends Entity implements IBuyable, ISpawner{
 
     private var _maxUnits:int = 5;
@@ -30,6 +32,7 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
         }
 
         _spawnCounter ++;
+        SpawnerVisuals(_visual).updateLoad(_spawnCounter / (_spawnRate * 60));
 
         if(_spawnCounter == _spawnRate * 60){
             var unit:Unit = Unit(Game.getInstance().createEntity(_entityToSpawn, _owner, getPosition(), false));

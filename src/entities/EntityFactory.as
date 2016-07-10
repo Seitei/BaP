@@ -11,11 +11,13 @@ public class EntityFactory {
     public function createEntity(entityName:String, owner:String, position:Point = null, dummy:Boolean = false):Entity {
 
         var entity:Entity;
-        var id:int = owner == "playerOne" ? 100000 : 200000;
 
         //the idea is, that you can create a new entity for other reasons
         //so you don't add it normally.
+        var id:int = -1;
+
         if(!dummy){
+            id = owner == "playerOne" ? 100000 : 200000;
             id += ++_autoIncrement;
         }
 

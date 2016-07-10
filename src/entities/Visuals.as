@@ -38,10 +38,10 @@ public class Visuals implements IVisuals{
     public function setSide(owner:String):void {
 
         if(owner != Game.getInstance().getPlayerName()){
-            setColor(Color.RED);
+            setColor(ResourceManager.RED);
         }
         else {
-            setColor(Color.GREEN);
+            setColor(ResourceManager.GREEN);
         }
 
     }

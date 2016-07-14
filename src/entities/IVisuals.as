@@ -10,6 +10,7 @@ public interface IVisuals {
     function getPreGraphics():DisplayObject;
     function enablePreGraphics():void;
     function disablePreGraphics():void;
+    function getSize():Number;
 
 }
 }

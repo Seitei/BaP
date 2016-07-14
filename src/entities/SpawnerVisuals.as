@@ -53,10 +53,12 @@ public class SpawnerVisuals extends Visuals implements IVisuals{
         container.addChild(image);
 
         _graphics = container;
+        _graphics.pivotX = _graphics.pivotY = _graphics.width / 2;
 
         //pre-graphics
         _preGraphics = new Image(rt);
         _preGraphics.alpha = 0.5;
+        _preGraphics.pivotX = _preGraphics.pivotY = _preGraphics.width / 2;
 
 
     }

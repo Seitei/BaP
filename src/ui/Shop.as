@@ -5,13 +5,15 @@ import entities.EntityFactory;
 
 import flash.geom.Point;
 import flash.ui.Keyboard;
+import flash.ui.Mouse;
 
 import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
 import starling.events.KeyboardEvent;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
+
+import utils.MouseUtils;
 
 public class Shop extends Sprite{
 
@@ -93,6 +95,7 @@ public class Shop extends Sprite{
     private function tryEntity(entityName:String):void {
 
         if(checkPrice(entityName)){
+            Mouse.hide();
             _positioning = true;
             displayEntity(entityName);
         }
@@ -104,6 +107,7 @@ public class Shop extends Sprite{
 
     private function displayEntity(entityName:String):void {
 
+        MouseUtils.setMouseCursor();
         Game.getInstance().addEventListener(TouchEvent.TOUCH, onTouch);
         _entityToPlace = EntityFactory.getInstance().createEntity(entityName, Game.getInstance().getPlayerName(), null, true);
         _entityToPlace.setPreGraphicsPosition(_helperPoint);
@@ -160,6 +164,7 @@ public class Shop extends Sprite{
                 return;
             }
 
+            Mouse.show();
             _positioning = false;
             _game.getPlayer().updateCredits(-EntitiesData.data[_entityName][EntitiesData.PRICE]);
             dispatchEventWith("entityPlaced", false, {entityName: _entityName, position: _entityToPlace.getPosition()});

@@ -10,14 +10,11 @@ import flash.net.registerClassAlias;
 import flash.utils.Dictionary;
 
 import gameLogic.GLEnemyTurn;
-
 import gameLogic.GLMyTurn;
 import gameLogic.GLPlay;
-
 import gameLogic.GameStateMachine;
 
 import net.NetConnect;
-import net.ServerConnect;
 
 import starling.display.Image;
 import starling.display.Sprite;

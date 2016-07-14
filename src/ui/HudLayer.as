@@ -5,6 +5,8 @@ import entities.Spawner;
 import flash.geom.Point;
 import flash.utils.Dictionary;
 
+import starling.display.Image;
+
 import starling.display.Quad;
 import starling.display.QuadBatch;
 import starling.display.Sprite;
@@ -14,6 +16,8 @@ import starling.events.TouchEvent;
 import starling.events.TouchPhase;
 import starling.utils.Color;
 
+import utils.MouseUtils;
+
 public class HudLayer extends Sprite{
 
     private static var _instance:HudLayer;
@@ -22,8 +26,8 @@ public class HudLayer extends Sprite{
     private var _paths:Dictionary;
     private var _linePaths:Dictionary;
     private var _enemyCorePosition:Point;
-    private var _activeSegmentOne:Quad;
-    private var _activeSegmentTwo:Quad;
+    private var _activeSegmentOne:Image;
+    private var _activeSegmentTwo:Image;
     private var _temporaryLines:Array;
     private var _onPathFinished:Function;
     private var _turnAid:QuadBatch;
@@ -76,13 +80,17 @@ public class HudLayer extends Sprite{
         _currentEntityID = entity.getId();
         _paths[_currentEntityID] = [entity.getPosition()];
         _startPoint = entity.getPosition();
-        _activeSegmentOne = new Quad(1, 1, Color.GREEN);
+        _activeSegmentOne = new Image(ResourceManager.getAssetManager().getTexture("line_fill_placing"));
+
         _activeSegmentOne.x = _startPoint.x;
         _activeSegmentOne.y = _startPoint.y;
+        _activeSegmentOne.color = ResourceManager.GREEN;
         addChild(_activeSegmentOne);
-        _activeSegmentTwo = new Quad(1, 1, Color.GREEN);
+        _activeSegmentTwo = new Image(ResourceManager.getAssetManager().getTexture("line_fill_placing"));
+
         _activeSegmentTwo.x = _enemyCorePosition.x;
         _activeSegmentTwo.y = _enemyCorePosition.y;
+        _activeSegmentTwo.color = ResourceManager.GREEN;
         addChild(_activeSegmentTwo);
         Game.getInstance().addEventListener(TouchEvent.TOUCH, onTouch);
 
@@ -99,11 +107,13 @@ public class HudLayer extends Sprite{
             pointOne = _paths[id][i];
             pointTwo = _paths[id][i + 1];
 
-            var line:Quad = new Quad(1, 1, Game.getInstance().getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayerName() ? Color.RED : Color.GREEN);
+            var color:uint = Game.getInstance().getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayerName() ? ResourceManager.RED : ResourceManager.GREEN;
+            var line:Image = new Image(ResourceManager.getAssetManager().getTexture("line_fill_placing"));
+            line.color = color;
             line.x = pointOne.x;
             line.y = pointOne.y;
             line.rotation = Math.atan2(pointTwo.y - pointOne.y, pointTwo.x - pointOne.x);
-            line.scaleX = Math.sqrt((pointTwo.x - pointOne.x) * (pointTwo.x - pointOne.x) + ( pointTwo.y - pointOne.y) * ( pointTwo.y - pointOne.y));
+            line.scaleX = Math.sqrt((pointTwo.x - pointOne.x) * (pointTwo.x - pointOne.x) + ( pointTwo.y - pointOne.y) * ( pointTwo.y - pointOne.y)) / 4;
             addChild(line);
             _linePaths[id].push(line);
 
@@ -139,7 +149,8 @@ public class HudLayer extends Sprite{
 
         if(began){
 
-            var line:Quad = new Quad(1, 1, Color.GREEN);
+            var line:Image = new Image(ResourceManager.getAssetManager().getTexture("line_fill_placing"));
+            line.color = ResourceManager.GREEN;
             line.x = _activeSegmentOne.x;
             line.y = _activeSegmentOne.y;
             line.scaleX = _activeSegmentOne.scaleX;
@@ -168,6 +179,7 @@ public class HudLayer extends Sprite{
 
             }
 
+            MouseUtils.reset();
             drawPath(_currentEntityID);
             Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
 
@@ -180,10 +192,11 @@ public class HudLayer extends Sprite{
     private function updateCurrentPath(posX:Number, posY:Number):void {
 
         _activeSegmentOne.rotation = Math.atan2(posY - _activeSegmentOne.y, posX - _activeSegmentOne.x);
-        _activeSegmentOne.scaleX = Math.sqrt((posX - _activeSegmentOne.x) * (posX - _activeSegmentOne.x) + ( _activeSegmentOne.y - posY) * ( _activeSegmentOne.y - posY));
+        _activeSegmentOne.scaleX = Math.sqrt((posX - _activeSegmentOne.x) * (posX - _activeSegmentOne.x) + ( _activeSegmentOne.y - posY) * ( _activeSegmentOne.y - posY)) / 4;
 
         _activeSegmentTwo.rotation = Math.atan2(posY - _activeSegmentTwo.y, posX - _activeSegmentTwo.x);
-        _activeSegmentTwo.scaleX = Math.sqrt((posX - _activeSegmentTwo.x) * (posX - _activeSegmentTwo.x) + ( _activeSegmentTwo.y - posY) * ( _activeSegmentTwo.y - posY));
+        _activeSegmentTwo.scaleX = Math.sqrt((posX - _activeSegmentTwo.x) * (posX - _activeSegmentTwo.x) + ( _activeSegmentTwo.y - posY) * ( _activeSegmentTwo.y - posY)) / 4;
+
 
 
     }

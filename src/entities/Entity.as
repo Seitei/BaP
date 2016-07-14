@@ -33,6 +33,7 @@ public class Entity{
         _visual.build(this);
         _graphics = _visual.getGraphics();
         _preGraphics = _visual.getPreGraphics();
+        _entitySize = _visual.getSize();
     }
 
     public function getEntityType():String {
@@ -128,10 +129,6 @@ public class Entity{
 
         if(_graphics.parent){
             _graphics.parent.removeChild(_graphics);
-        }
-
-        if(_preGraphics.parent){
-            _preGraphics.parent.removeChild(_preGraphics);
         }
 
     }

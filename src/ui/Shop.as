@@ -61,27 +61,27 @@ public class Shop extends Sprite{
                 break;
 
             case Keyboard.W:
-                entityName = EntitiesData.CB2;
+                entityName = EntitiesData.SRT1;
                 break;
 
             case Keyboard.S:
-                entityName = EntitiesData.TOWERT1;
+                entityName = EntitiesData.SRT2;
                 break;
 
             case Keyboard.X:
-                entityName = EntitiesData.TOWERT2;
+                entityName = EntitiesData.SRT3;
                 break;
 
             case Keyboard.E:
-                entityName = EntitiesData.CB2;
-                break;
-
-            case Keyboard.D:
                 entityName = EntitiesData.TOWERT1;
                 break;
 
-            case Keyboard.C:
+            case Keyboard.D:
                 entityName = EntitiesData.TOWERT2;
+                break;
+
+            case Keyboard.C:
+                entityName = EntitiesData.TOWERT3;
                 break;
 
         }
@@ -131,6 +131,7 @@ public class Shop extends Sprite{
 
     private function checkPrice(entityName:String):Boolean {
 
+        return true;
         return _game.getPlayer().getCredits() >= EntitiesData.data[entityName][EntitiesData.PRICE];
 
     }

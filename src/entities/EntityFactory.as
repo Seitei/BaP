@@ -36,6 +36,9 @@ public class EntityFactory {
             case EntitiesData.SMT1:
             case EntitiesData.SMT2:
             case EntitiesData.SMT3:
+            case EntitiesData.SRT1:
+            case EntitiesData.SRT2:
+            case EntitiesData.SRT3:
 
                 entity = new Spawner(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.MAX_UNITS], _data[EntitiesData.SPAWN_RATE], _data[EntitiesData.ENTITY_TO_SPAWN], _data[EntitiesData.PRICE]);
                 visuals = new SpawnerVisuals();
@@ -44,6 +47,9 @@ public class EntityFactory {
             case EntitiesData.MT1:
             case EntitiesData.MT2:
             case EntitiesData.MT3:
+            case EntitiesData.RT1:
+            case EntitiesData.RT2:
+            case EntitiesData.RT3:
 
                 entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.BULLET_SPEED], _data[EntitiesData.DAMAGE], _data[EntitiesData.AOE_RADIUS], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
                 visuals = new Visuals();
@@ -74,6 +80,7 @@ public class EntityFactory {
 
             case EntitiesData.TOWERT1:
             case EntitiesData.TOWERT2:
+            case EntitiesData.TOWERT3:
 
                 entity = new Tower(id, entityName, _data[EntitiesData.PRICE], _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.BULLET_SPEED], _data[EntitiesData.DAMAGE], _data[EntitiesData.RANGE]);
                 visuals = new Visuals();

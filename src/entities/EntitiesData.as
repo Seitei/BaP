@@ -23,17 +23,22 @@ public class EntitiesData {
     public static const SMT1:String = "SMT1";
     public static const SMT2:String = "SMT2";
     public static const SMT3:String = "SMT3";
+    public static const SRT1:String = "SRT1";
+    public static const SRT2:String = "SRT2";
+    public static const SRT3:String = "SRT3";
     public static const MT1:String = "MT1";
     public static const MT2:String = "MT2";
     public static const MT3:String = "MT3";
+    public static const RT1:String = "RT1";
+    public static const RT2:String = "RT2";
+    public static const RT3:String = "RT3";
     public static const NORMAL_BULLET:String = "NORMAL_BULLET";
     public static const AOE_BULLET:String = "AOE_BULLET";
     public static const CB1:String = "CREDITS_BOOSTER1";
     public static const CB2:String = "CREDITS_BOOSTER2";
     public static const TOWERT1:String = "TOWERT1";
     public static const TOWERT2:String = "TOWERT2";
-    //to experiment different look & feels
-    public static const ENTITIES_SCALE:Number = 0.65;
+    public static const TOWERT3:String = "TOWERT3";
 
 
 
@@ -74,6 +79,31 @@ public class EntitiesData {
     data[SMT3][ENTITY_TO_SPAWN] = MT3;
     data[SMT3][PRICE]           = 5;
 
+    data[SRT1] = new Dictionary();
+
+    data[SRT1][HITPOINTS]       = 100;
+    data[SRT1][MAX_UNITS]       = 5;
+    data[SRT1][SPAWN_RATE]      = 1;
+    data[SRT1][ENTITY_TO_SPAWN] = RT1;
+    data[SRT1][PRICE]           = 8;
+
+
+    data[SRT2] = new Dictionary();
+
+    data[SRT2][HITPOINTS]       = 200;
+    data[SRT2][MAX_UNITS]       = 7;
+    data[SRT2][SPAWN_RATE]      = 2;
+    data[SRT2][ENTITY_TO_SPAWN] = RT2;
+    data[SRT2][PRICE]           = 15;
+
+    data[SRT3] = new Dictionary();
+
+    data[SRT3][HITPOINTS]       = 100;
+    data[SRT3][MAX_UNITS]       = 1;
+    data[SRT3][SPAWN_RATE]      = 2;
+    data[SRT3][ENTITY_TO_SPAWN] = RT3;
+    data[SRT3][PRICE]           = 5;
+
 
 
     ///////////// UNITS /////////////
@@ -112,6 +142,40 @@ public class EntitiesData {
     data[MT3][BULLET_SPEED]    = 2;
 
 
+    data[RT1] = new Dictionary();
+
+    data[RT1][HITPOINTS]       = 20;
+    data[RT1][SHOOT_RATE]      = 0.7;
+    data[RT1][BULLET]          = NORMAL_BULLET;
+    data[RT1][RANGE]           = 100;
+    data[RT1][DAMAGE]          = 4;
+    data[RT1][SPEED]           = 1;
+    data[RT1][AOE_RADIUS]      = 1;
+    data[RT1][BULLET_SPEED]    = 3;
+
+    data[RT2] = new Dictionary();
+
+    data[RT2][HITPOINTS]       = 50;
+    data[RT2][SHOOT_RATE]      = 0.9;
+    data[RT2][BULLET]          = NORMAL_BULLET;
+    data[RT2][RANGE]           = 125;
+    data[RT2][DAMAGE]          = 7;
+    data[RT2][SPEED]           = 2;
+    data[RT2][AOE_RADIUS]      = 1;
+    data[RT2][BULLET_SPEED]    = 3;
+
+    data[RT3] = new Dictionary();
+
+    data[RT3][HITPOINTS]       = 50;
+    data[RT3][SHOOT_RATE]      = 1;
+    data[RT3][BULLET]          = AOE_BULLET;
+    data[RT3][RANGE]           = 150;
+    data[RT3][DAMAGE]          = 5;
+    data[RT3][SPEED]           = 1;
+    data[RT3][AOE_RADIUS]      = 30;
+    data[RT3][BULLET_SPEED]    = 2;
+
+
 
 
     ///////////// SUPPORT /////////////
@@ -147,11 +211,21 @@ public class EntitiesData {
 
     data[TOWERT2][HITPOINTS]           = 220;
     data[TOWERT2][PRICE]               = 18;
-    data[TOWERT1][BULLET]              = NORMAL_BULLET;
+    data[TOWERT1][BULLET]              = AOE_BULLET;
     data[TOWERT2][DAMAGE]              = 11;
     data[TOWERT2][SHOOT_RATE]          = 0.2;
     data[TOWERT2][RANGE]               = 70;
     data[TOWERT2][BULLET_SPEED]        = 2;
+
+    data[TOWERT3] = new Dictionary();
+
+    data[TOWERT2][HITPOINTS]           = 220;
+    data[TOWERT2][PRICE]               = 28;
+    data[TOWERT1][BULLET]              = NORMAL_BULLET;
+    data[TOWERT2][DAMAGE]              = 50;
+    data[TOWERT2][SHOOT_RATE]          = 0.2;
+    data[TOWERT2][RANGE]               = 200;
+    data[TOWERT2][BULLET_SPEED]        = 5;
     
 
 

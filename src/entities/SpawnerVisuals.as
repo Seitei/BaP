@@ -1,5 +1,7 @@
 package entities {
 
+import entities.ISpawner;
+
 import starling.display.BlendMode;
 import starling.display.Image;
 import starling.display.Quad;
@@ -20,7 +22,7 @@ public class SpawnerVisuals extends Visuals implements IVisuals{
         //graphics
         var container:Sprite = new Sprite();
 
-        var spawnedEntity:Image = new Image(ResourceManager.getAssetManager().getTexture("MT1"));
+        var spawnedEntity:Image = new Image(ResourceManager.getAssetManager().getTexture(ISpawner(entity).getEntityToSpawn()));
         var backgroundCircle:Image = new Image(ResourceManager.getAssetManager().getTexture("spawner_bg"));
         backgroundCircle.color = ResourceManager.GRAY;
 

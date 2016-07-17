@@ -8,8 +8,9 @@ public class NormalBullet extends Entity implements IBullet {
     private var _speed:Number;
     private var _distanceWalked:Number;
     private var _distanceToTarget:Number;
-    private var _currentTarget:Entity;
-    private var _damage:Number;
+    protected var _currentTarget:Entity;
+    protected var _damage:Number;
+    protected var _areaRadius:Number;
 
     public function NormalBullet(id:int, entityName:String) {
 
@@ -30,11 +31,15 @@ public class NormalBullet extends Entity implements IBullet {
         calculatePath();
     }
 
+    public function setAreaRadius(value:Number):void {
+        _areaRadius = value;
+    }
+
     private function move():void {
 
         if(_distanceWalked >= _distanceToTarget - _currentTarget.entitySize){
 
-            _currentTarget.updateHP(-_damage);
+            applyEffect();
             destroy();
 
         }
@@ -48,6 +53,9 @@ public class NormalBullet extends Entity implements IBullet {
 
     }
 
+    protected function applyEffect():void {
+        _currentTarget.updateHP(-_damage);
+    }
 
     override public function update():void {
         move();

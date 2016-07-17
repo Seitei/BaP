@@ -16,14 +16,18 @@ public class EntitiesData {
     public static const SPEED:String = "speed";
     public static const BULLET_SPEED:String = "bullet_speed";
     public static const DAMAGE:String = "damage";
+    public static const AOE_RADIUS:String = "AoERadius";
     public static const CREDITS_RATE:String = "creditsRate";
 
     public static const CORE:String = "CORE";
     public static const SMT1:String = "SMT1";
     public static const SMT2:String = "SMT2";
+    public static const SMT3:String = "SMT3";
     public static const MT1:String = "MT1";
     public static const MT2:String = "MT2";
+    public static const MT3:String = "MT3";
     public static const NORMAL_BULLET:String = "NORMAL_BULLET";
+    public static const AOE_BULLET:String = "AOE_BULLET";
     public static const CB1:String = "CREDITS_BOOSTER1";
     public static const CB2:String = "CREDITS_BOOSTER2";
     public static const TOWERT1:String = "TOWERT1";
@@ -62,6 +66,14 @@ public class EntitiesData {
     data[SMT2][ENTITY_TO_SPAWN] = MT2;
     data[SMT2][PRICE]           = 15;
 
+    data[SMT3] = new Dictionary();
+
+    data[SMT3][HITPOINTS]       = 100;
+    data[SMT3][MAX_UNITS]       = 1;
+    data[SMT3][SPAWN_RATE]      = 2;
+    data[SMT3][ENTITY_TO_SPAWN] = MT3;
+    data[SMT3][PRICE]           = 5;
+
 
 
     ///////////// UNITS /////////////
@@ -69,22 +81,36 @@ public class EntitiesData {
     data[MT1] = new Dictionary();
 
     data[MT1][HITPOINTS]       = 20;
-    data[MT1][SHOOT_RATE]      = 1;
+    data[MT1][SHOOT_RATE]      = 0.7;
     data[MT1][BULLET]          = NORMAL_BULLET;
-    data[MT1][RANGE]           = 35;
-    data[MT1][DAMAGE]          = 7;
+    data[MT1][RANGE]           = 50;
+    data[MT1][DAMAGE]          = 4;
     data[MT1][SPEED]           = 1;
+    data[MT1][AOE_RADIUS]      = 1;
     data[MT1][BULLET_SPEED]    = 3;
 
     data[MT2] = new Dictionary();
 
     data[MT2][HITPOINTS]       = 50;
-    data[MT2][SHOOT_RATE]      = 2;
+    data[MT2][SHOOT_RATE]      = 0.9;
     data[MT2][BULLET]          = NORMAL_BULLET;
     data[MT2][RANGE]           = 25;
-    data[MT2][DAMAGE]          = 11;
+    data[MT2][DAMAGE]          = 7;
     data[MT2][SPEED]           = 2;
-    data[MT1][BULLET_SPEED]    = 3;
+    data[MT2][AOE_RADIUS]      = 1;
+    data[MT2][BULLET_SPEED]    = 3;
+
+    data[MT3] = new Dictionary();
+
+    data[MT3][HITPOINTS]       = 50;
+    data[MT3][SHOOT_RATE]      = 1;
+    data[MT3][BULLET]          = AOE_BULLET;
+    data[MT3][RANGE]           = 50;
+    data[MT3][DAMAGE]          = 5;
+    data[MT3][SPEED]           = 1;
+    data[MT3][AOE_RADIUS]      = 30;
+    data[MT3][BULLET_SPEED]    = 2;
+
 
 
 

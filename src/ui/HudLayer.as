@@ -107,9 +107,8 @@ public class HudLayer extends Sprite{
             pointOne = _paths[id][i];
             pointTwo = _paths[id][i + 1];
 
-            var color:uint = Game.getInstance().getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayerName() ? ResourceManager.RED : ResourceManager.GREEN;
             var line:Image = new Image(ResourceManager.getAssetManager().getTexture("line_fill_placing"));
-            line.color = color;
+            line.color = Game.getInstance().getEntityColorByID(id);
             line.x = pointOne.x;
             line.y = pointOne.y;
             line.rotation = Math.atan2(pointTwo.y - pointOne.y, pointTwo.x - pointOne.x);

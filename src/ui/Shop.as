@@ -52,23 +52,35 @@ public class Shop extends Sprite{
                 entityName = EntitiesData.SMT1;
                 break;
 
-            case Keyboard.W:
+            case Keyboard.A:
                 entityName = EntitiesData.SMT2;
                 break;
 
             case Keyboard.Z:
-                entityName = EntitiesData.CB1;
+                entityName = EntitiesData.SMT3;
                 break;
 
-            case Keyboard.X:
+            case Keyboard.W:
                 entityName = EntitiesData.CB2;
                 break;
 
-            case Keyboard.A:
+            case Keyboard.S:
                 entityName = EntitiesData.TOWERT1;
                 break;
 
-            case Keyboard.S:
+            case Keyboard.X:
+                entityName = EntitiesData.TOWERT2;
+                break;
+
+            case Keyboard.E:
+                entityName = EntitiesData.CB2;
+                break;
+
+            case Keyboard.D:
+                entityName = EntitiesData.TOWERT1;
+                break;
+
+            case Keyboard.C:
                 entityName = EntitiesData.TOWERT2;
                 break;
 
@@ -169,7 +181,6 @@ public class Shop extends Sprite{
             _game.getPlayer().updateCredits(-EntitiesData.data[_entityName][EntitiesData.PRICE]);
             dispatchEventWith("entityPlaced", false, {entityName: _entityName, position: _entityToPlace.getPosition()});
             Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
-            deactivateShop();
             _entityToPlace.destroy();
 
         }

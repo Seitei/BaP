@@ -35,6 +35,7 @@ public class EntityFactory {
 
             case EntitiesData.SMT1:
             case EntitiesData.SMT2:
+            case EntitiesData.SMT3:
 
                 entity = new Spawner(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.MAX_UNITS], _data[EntitiesData.SPAWN_RATE], _data[EntitiesData.ENTITY_TO_SPAWN], _data[EntitiesData.PRICE]);
                 visuals = new SpawnerVisuals();
@@ -42,8 +43,9 @@ public class EntityFactory {
 
             case EntitiesData.MT1:
             case EntitiesData.MT2:
+            case EntitiesData.MT3:
 
-                entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.BULLET_SPEED], _data[EntitiesData.DAMAGE], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
+                entity = new Unit(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.SHOOT_RATE], _data[EntitiesData.BULLET], _data[EntitiesData.BULLET_SPEED], _data[EntitiesData.DAMAGE], _data[EntitiesData.AOE_RADIUS], _data[EntitiesData.RANGE], _data[EntitiesData.SPEED]);
                 visuals = new Visuals();
                 break;
 
@@ -54,6 +56,14 @@ public class EntityFactory {
                 entity = new NormalBullet(id, entityName);
                 visuals = new Visuals();
                 break;
+
+            case EntitiesData.AOE_BULLET:
+
+                entity = new AoEBullet(id, entityName);
+                visuals = new Visuals();
+                break;
+
+
 
             case EntitiesData.CB1:
             case EntitiesData.CB2:

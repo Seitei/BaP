@@ -1,6 +1,4 @@
 package entities {
-import entities.SpawnerVisuals;
-
 public class Spawner extends Entity implements IBuyable, ISpawner{
 
     private var _maxUnits:int = 5;
@@ -14,14 +12,14 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
 
     public function Spawner(id:int, entityName:String, hitPoints: int, maxUnits:int, spawnRate: Number, entityToSpawn:String, price:int) {
 
+        super(id, "spawner", entityName);
+
         _entityToSpawn = entityToSpawn;
         _maxUnits = maxUnits;
         _spawnRate = spawnRate;
         _price = price;
         _hitPoints = hitPoints;
         _units = new <Unit>[];
-
-        super(id, "spawner", entityName);
 
     }
 
@@ -74,6 +72,12 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
     }
 
 
+    override public function updateHP(value:Number):void {
+        super.updateHP(value);
+    }
 
+    override public function destroy():void {
+        super.destroy();
+    }
 }
 }

@@ -1,8 +1,11 @@
 package entities {
 
+import flash.events.TimerEvent;
 import flash.geom.Point;
+import flash.utils.Timer;
 
 import starling.display.DisplayObject;
+import starling.filters.ColorMatrixFilter;
 
 public class Entity{
 
@@ -19,13 +22,16 @@ public class Entity{
     protected var _entitySize:Number;
     protected var _graphics:DisplayObject;
     protected var _preGraphics:DisplayObject;
+    private var _timer:Timer;
 
     public function Entity(id:int, entityType:String, entityName:String) {
 
         _id = id;
         _entityType = entityType;
         _entityName = entityName;
-
+        //TODO remove from here
+        _timer = new Timer(150, 1);
+        _timer.addEventListener(TimerEvent.TIMER, onTimer);
     }
 
     public function buildVisuals(visuals:IVisuals):void {
@@ -111,6 +117,15 @@ public class Entity{
         if(_hitPoints <= 0){
             destroy();
         }
+        //TODO remove this from here, implement utils helper
+        _timer.start();
+        _graphics.filter = new ColorMatrixFilter().adjustBrightness(0.5);
+    }
+
+    private function onTimer(event:TimerEvent):void {
+
+        _graphics.filter = null;
+        _timer.stop();
 
     }
 
@@ -130,6 +145,7 @@ public class Entity{
         if(_graphics.parent){
             _graphics.parent.removeChild(_graphics);
         }
+        _timer.removeEventListener(TimerEvent.TIMER, onTimer);
 
     }
 

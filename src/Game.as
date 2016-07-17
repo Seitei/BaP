@@ -295,6 +295,10 @@ public class Game extends Sprite {
 
     }
 
+    public function getEntitiesLayer():Sprite {
+        return _entitiesLayer;
+    }
+
     public function getEntityByID(entityID:int):Entity {
         return _entitiesByID[entityID];
     }
@@ -329,6 +333,12 @@ public class Game extends Sprite {
     public function addToDestroy(entity:Entity):void {
 
         _entitiesToDestroy.push(entity);
+
+    }
+
+    public function getEntityColorByID(id:int):uint {
+
+        return getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayerName() ? ResourceManager.RED : ResourceManager.GREEN;
 
     }
 

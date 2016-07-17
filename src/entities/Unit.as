@@ -5,7 +5,7 @@ public class Unit extends Entity {
     private var _counter:int;
     private var _shootRate:Number;
     private var _bullet:String;
-    private var _damage:Number;
+    private var _bulletDamage:Number;
     private var _bulletSpeed:Number;
     private var _currentTarget:Entity;
     private var _shooting:Boolean;
@@ -21,17 +21,19 @@ public class Unit extends Entity {
     private var _currentWayPoint:int;
     private var _speed:Number;
     private var _spawner:Spawner;
+    private var _bulletAoERadius:Number;
 
 
-    public function Unit(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, bulletSpeed:Number, damage:Number, range:Number, speed:Number) {
+    public function Unit(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, bulletSpeed:Number, bulletDamage:Number, bulletAoERadius:Number, range:Number, speed:Number) {
 
         super(id, "unit", entityName);
 
         _shootRate = shootRate;
         _bullet = bullet;
         _range = range;
-        _damage = damage;
+        _bulletDamage = bulletDamage;
         _speed = speed;
+        _bulletAoERadius = bulletAoERadius;
         _bulletSpeed = bulletSpeed;
         _hitPoints = hitPoints;
 
@@ -48,9 +50,10 @@ public class Unit extends Entity {
         if(_counter >= _shootRate * 60){
 
             var entity:Entity = Game.getInstance().createEntity(_bullet, _owner, getPosition(), false);
-            IBullet(entity).setDamage(_damage);
+            IBullet(entity).setDamage(_bulletDamage);
             IBullet(entity).setSpeed(_bulletSpeed);
             IBullet(entity).setTarget(_currentTarget);
+            IBullet(entity).setAreaRadius(_bulletAoERadius);
             _counter = 0;
 
         }

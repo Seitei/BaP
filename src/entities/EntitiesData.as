@@ -199,13 +199,13 @@ public class EntitiesData {
 
     data[TOWERT1] = new Dictionary();
 
-    data[TOWERT1][HITPOINTS]           = 120;
+    data[TOWERT1][HITPOINTS]           = 240;
     data[TOWERT1][PRICE]               = 7;
-    data[TOWERT1][DAMAGE]              = 8;
+    data[TOWERT1][DAMAGE]              = 12;
     data[TOWERT1][BULLET]              = NORMAL_BULLET;
-    data[TOWERT1][SHOOT_RATE]          = 0.5;
-    data[TOWERT1][RANGE]               = 50;
-    data[TOWERT1][BULLET_SPEED]        = 2;
+    data[TOWERT1][SHOOT_RATE]          = 0.3;
+    data[TOWERT1][RANGE]               = 150;
+    data[TOWERT1][BULLET_SPEED]        = 5;
 
     data[TOWERT2] = new Dictionary();
 

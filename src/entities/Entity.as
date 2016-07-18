@@ -142,9 +142,8 @@ public class Entity{
             Game.getInstance().addToDestroy(this);
         }
 
-        if(_graphics.parent){
-            _graphics.parent.removeChild(_graphics);
-        }
+        _visual.destroy();
+
         _timer.removeEventListener(TimerEvent.TIMER, onTimer);
 
     }

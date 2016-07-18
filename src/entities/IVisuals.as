@@ -11,6 +11,7 @@ public interface IVisuals {
     function enablePreGraphics():void;
     function disablePreGraphics():void;
     function getSize():Number;
+    function destroy():void;
 
 }
 }

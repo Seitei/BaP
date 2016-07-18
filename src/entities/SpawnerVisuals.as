@@ -1,7 +1,5 @@
 package entities {
 
-import entities.ISpawner;
-
 import starling.display.BlendMode;
 import starling.display.Image;
 import starling.display.Quad;

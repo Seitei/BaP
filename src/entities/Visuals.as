@@ -25,6 +25,10 @@ public class Visuals implements IVisuals{
         _graphics.pivotX = _graphics.width / 2;
         _graphics.pivotY = _graphics.height / 2;
 
+        _preGraphics = new Image(_entityShape.texture);
+        _preGraphics.pivotX = _preGraphics.pivotY = _preGraphics.width / 2;
+        _preGraphics.alpha = 0.5;
+
     }
 
     public function getSize():Number {
@@ -66,6 +70,14 @@ public class Visuals implements IVisuals{
         // implement debug features;
     }
 
+    public function destroy():void {
+        if(_graphics.parent){
+            _graphics.parent.removeChild(_graphics);
+        }
+        if(_preGraphics.parent){
+            _preGraphics.parent.removeChild(_preGraphics);
+        }
+    }
 
 
 

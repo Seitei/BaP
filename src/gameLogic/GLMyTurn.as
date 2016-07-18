@@ -13,6 +13,8 @@ import starling.events.KeyboardEvent;
 import ui.HudLayer;
 import ui.Shop;
 
+import utils.MouseUtils;
+
 public class GLMyTurn implements IGameLogic{
 
     private var _game:Game;
@@ -76,6 +78,7 @@ public class GLMyTurn implements IGameLogic{
         }
 
         if(entity is ISpawner){
+            MouseUtils.setMouseCursor();
             showPath(entity);
         }
 

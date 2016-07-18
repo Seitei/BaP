@@ -40,10 +40,6 @@ public class Shop extends Sprite{
             return;
         }
 
-        if(_positioning){
-            return;
-        }
-
         var entityName:String;
 
         switch(e.keyCode){
@@ -87,6 +83,9 @@ public class Shop extends Sprite{
         }
 
         if(entityName){
+            if(_positioning){
+                cancel();
+            }
             _entityName = entityName;
             tryEntity(entityName);
         }
@@ -96,6 +95,7 @@ public class Shop extends Sprite{
 
     private function cancel():void {
 
+        MouseUtils.reset();
         _positioning = false;
         _entityToPlace.destroy();
         Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
@@ -107,7 +107,6 @@ public class Shop extends Sprite{
     private function tryEntity(entityName:String):void {
 
         if(checkPrice(entityName)){
-            Mouse.hide();
             _positioning = true;
             displayEntity(entityName);
         }
@@ -119,7 +118,7 @@ public class Shop extends Sprite{
 
     private function displayEntity(entityName:String):void {
 
-        MouseUtils.setMouseCursor();
+        Mouse.hide();
         Game.getInstance().addEventListener(TouchEvent.TOUCH, onTouch);
         _entityToPlace = EntityFactory.getInstance().createEntity(entityName, Game.getInstance().getPlayerName(), null, true);
         _entityToPlace.setPreGraphicsPosition(_helperPoint);

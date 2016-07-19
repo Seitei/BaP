@@ -23,7 +23,9 @@ public class NetConnect extends EventDispatcher{
     private var _netGroup:NetGroup;
     private var _user:String;
     private var _connected:Boolean = false;
-    private var _playerNumber:int;
+
+    // Custom Server Code
+    private var _serverConnect:ServerConnect = new ServerConnect();
 
     public function NetConnect() {
 
@@ -45,9 +47,14 @@ public class NetConnect extends EventDispatcher{
                 break;
 
             case "NetGroup.Neighbor.Connect":
+                _serverConnect.startMatch(_serverConnect.getGroupSpec());
                 _nearId = _nc.nearID;
                 _farId = event.info.peerID;
                 sendMessage(PLAYER_FOUND, _farId);
+                break;
+
+            case "NetGroup.Neighbor.Disconnect":
+                _serverConnect.endMatch(_serverConnect.getGroupSpec());
                 break;
 
             case "NetGroup.Posting.Notify":
@@ -64,21 +71,18 @@ public class NetConnect extends EventDispatcher{
         var id:int = Math.random() * int.MAX_VALUE;
         var playerName:String = "player" + id;
 
-        var serverConnect:ServerConnect = new ServerConnect();
-        serverConnect.match(playerName, function(data:String):void {
-            var result:Object = JSON.parse(data);
-            trace("[ServerConnect] GroupSpecifier: " + result.key.toString());
-            trace("[ServerConnect] Player slot: " + result.player_number.toString());
-            _playerNumber = parseInt(result.player_number.toString(), 10);
+        _serverConnect.match(playerName, function(data:Object):void {
+            trace("[ServerConnect] GroupSpecifier: " + _serverConnect.getGroupSpec());
+            trace("[ServerConnect] Player slot: " + _serverConnect.getPlayerNumber());
 
-            var groupSpec:GroupSpecifier = new GroupSpecifier(result.key.toString());
+            var groupSpec:GroupSpecifier = new GroupSpecifier(_serverConnect.getGroupSpec());
             groupSpec.serverChannelEnabled = true;
             groupSpec.postingEnabled = true;
 
             _netGroup = new NetGroup(_nc,groupSpec.groupspecWithAuthorizations());
             _netGroup.addEventListener(NetStatusEvent.NET_STATUS,netStatus);
 
-            _user = "user" + result.player_number.toString();
+            _user = "user" + _serverConnect.getPlayerNumber();
         });
 
 
@@ -103,7 +107,7 @@ public class NetConnect extends EventDispatcher{
     }
 
     public function getPlayerNumber():int {
-        return _playerNumber;
+        return _serverConnect.getPlayerNumber();
     }
 
 

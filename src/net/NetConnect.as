@@ -25,6 +25,7 @@ public class NetConnect extends EventDispatcher{
     private var _connected:Boolean = false;
 
     // Custom Server Code
+    private var _playerNumber:int = 1;
     private var _serverConnect:ServerConnect = new ServerConnect();
 
     public function NetConnect() {
@@ -47,10 +48,16 @@ public class NetConnect extends EventDispatcher{
                 break;
 
             case "NetGroup.Neighbor.Connect":
-                _serverConnect.startMatch(_serverConnect.getGroupSpec());
-                _nearId = _nc.nearID;
-                _farId = event.info.peerID;
-                sendMessage(PLAYER_FOUND, _farId);
+                _serverConnect.startMatch(_serverConnect.getGroupSpec(), _serverConnect.getPlayerName(), (function(event:NetStatusEvent){
+                    return function(data:Object) {
+                        _playerNumber = parseInt(data.player_number, 10);
+                        trace("[ServerConnect] PlayerNumber: " + _playerNumber);
+
+                        _nearId = _nc.nearID;
+                        _farId = event.info.peerID;
+                        sendMessage(PLAYER_FOUND, _farId);
+                    }
+                })(event));
                 break;
 
             case "NetGroup.Neighbor.Disconnect":
@@ -73,7 +80,6 @@ public class NetConnect extends EventDispatcher{
 
         _serverConnect.match(playerName, function(data:Object):void {
             trace("[ServerConnect] GroupSpecifier: " + _serverConnect.getGroupSpec());
-            trace("[ServerConnect] Player slot: " + _serverConnect.getPlayerNumber());
 
             var groupSpec:GroupSpecifier = new GroupSpecifier(_serverConnect.getGroupSpec());
             groupSpec.serverChannelEnabled = true;
@@ -82,7 +88,7 @@ public class NetConnect extends EventDispatcher{
             _netGroup = new NetGroup(_nc,groupSpec.groupspecWithAuthorizations());
             _netGroup.addEventListener(NetStatusEvent.NET_STATUS,netStatus);
 
-            _user = "user" + _serverConnect.getPlayerNumber();
+            _user = "user" + _playerNumber;
         });
 
 
@@ -107,7 +113,7 @@ public class NetConnect extends EventDispatcher{
     }
 
     public function getPlayerNumber():int {
-        return _serverConnect.getPlayerNumber();
+        return _playerNumber;
     }
 
 

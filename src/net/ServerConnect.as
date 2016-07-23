@@ -7,23 +7,20 @@ import flash.events.IEventDispatcher;
 import flash.events.IOErrorEvent;
 import flash.events.ProgressEvent;
 import flash.events.SecurityErrorEvent;
-import flash.events.TimerEvent;
 import flash.net.URLLoader;
 import flash.net.URLRequest;
-import flash.utils.Timer;
 
 public class ServerConnect extends EventDispatcher {
 
     private var _loader:URLLoader = new URLLoader();
     private var _completeCallback:Function;
+    //private var _debug:Boolean = true;
     private var _debug:Boolean = false;
     private const HOST:String = "http://gb-dk40gm4e.rhcloud.com";
     //private const HOST:String = "http://gb.local";
 
     private var _groupSpec:String;
     private var _playerName:String;
-    private var _playerNumber:int;
-    private var _cancelMatchTimer:Timer = new Timer(4000, 1);
 
     public function getGroupSpec():String {
         return _groupSpec;
@@ -33,12 +30,7 @@ public class ServerConnect extends EventDispatcher {
         return _playerName;
     }
 
-    public function getPlayerNumber():int {
-        return _playerNumber;
-    }
-
     public function ServerConnect() {
-        _cancelMatchTimer.addEventListener(TimerEvent.TIMER_COMPLETE, cancelMatch);
     }
 
     private function configureListeners(dispatcher:IEventDispatcher):void {
@@ -100,7 +92,7 @@ public class ServerConnect extends EventDispatcher {
         _completeCallback = completeCallback;
         configureListeners(_loader);
         var finalUrl:String = HOST + url;
-                log("Calling: " + finalUrl);
+        log("Calling: " + finalUrl);
         var request:URLRequest = new URLRequest(finalUrl);
         try {
             _loader.load(request);
@@ -109,37 +101,22 @@ public class ServerConnect extends EventDispatcher {
         }
     }
 
-    private function cancelMatch(evt:TimerEvent):void {
-        resetMatch(_groupSpec, _playerName);
-    }
-
     public function match(playerName:String, completeCallback:Function):void {
         call("/match/" + playerName, function(data:Object){
             _groupSpec = data.key.toString();
-            _playerNumber = parseInt(data.player_number.toString(), 10);
             _playerName = playerName;
-            if(_playerNumber == 2) {
-                _cancelMatchTimer.reset();
-                _cancelMatchTimer.start();
-            }
             if(completeCallback) {
                 completeCallback(data);
             }
         });
     }
 
-    public function startMatch(groupSpec:String, completeCallback:Function = null):void {
-        _cancelMatchTimer.stop();
-        call("/match/start/" + groupSpec, completeCallback);
+    public function startMatch(groupSpec:String, playerName:String, completeCallback:Function = null):void {
+        call("/match/start/" + groupSpec + "/" + playerName, completeCallback);
     }
 
     public function endMatch(groupSpec:String, completeCallback:Function = null):void {
         call("/match/end/" + groupSpec, completeCallback);
-    }
-
-    public function resetMatch(groupSpec:String, playerName:String, completeCallback:Function = null):void {
-        _playerNumber = 1;
-        call("/match/reset/" + groupSpec + "/" + playerName, completeCallback);
     }
 }
 }

@@ -1,12 +1,13 @@
 package gameLogic {
 import entities.Entity;
+import entities.EntityManager;
 
 import starling.events.EnterFrameEvent;
 import starling.events.Event;
 
 public class GLPlay implements IGameLogic{
 
-    private static const PLAY_TIME_DURATION:int = 50 * 60;
+    private static const PLAY_TIME_DURATION:int = 5 * 60;
 
     private var _turnTime:int;
     private var _game:Game;
@@ -17,7 +18,7 @@ public class GLPlay implements IGameLogic{
 
         _stateName = GameStateMachine.PLAY_TIME;
         _game = Game.getInstance();
-        _entities = _game.getEntities();
+        _entities = EntityManager.getInstance().getEntitites();
 
     }
 
@@ -54,7 +55,7 @@ public class GLPlay implements IGameLogic{
 
         }
 
-        _game.checkEntitiesToDestroy();
+        EntityManager.getInstance().checkEntitiesToDestroy();
 
     }
 

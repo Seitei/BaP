@@ -60,7 +60,7 @@ public class Tower extends Entity implements IBuyable{
 
         if(_shooting){
 
-            if(_currentTarget.isDestroyed()){
+            if(!_currentTarget || _currentTarget.isDestroyed()){
                 _shooting = false;
                 _currentTarget = null;
             }
@@ -102,20 +102,16 @@ public class Tower extends Entity implements IBuyable{
 
     override public function update():void {
         shoot();
+
     }
 
 
     override public function setOwner(owner:String):void {
 
         super.setOwner(owner);
-        _shootableEnemyEntities = _owner == "playerOne" ? Game.getInstance().getEntitiesSubGroup("shootablePlayerTwoEntities") : Game.getInstance().getEntitiesSubGroup("shootablePlayerOneEntities");
+        _shootableEnemyEntities = EntityManager.getInstance().getShootableEnemyEntities(this.getOwner());
 
     }
 
-    override public function destroy():void {
-
-        super.destroy();
-
-    }
 }
 }

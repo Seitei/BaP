@@ -1,4 +1,6 @@
 package entities {
+import starling.utils.Color;
+
 public class Unit extends Entity {
 
     private var _wayPoints:Array;
@@ -52,8 +54,8 @@ public class Unit extends Entity {
             var entity:Entity = Game.getInstance().createEntity(_bullet, _owner, getPosition(), false);
             IBullet(entity).setDamage(_bulletDamage);
             IBullet(entity).setSpeed(_bulletSpeed);
-            IBullet(entity).setTarget(_currentTarget);
             IBullet(entity).setAreaRadius(_bulletAoERadius);
+            IBullet(entity).setTarget(_currentTarget);
             _counter = 0;
 
         }
@@ -64,7 +66,7 @@ public class Unit extends Entity {
 
         if(_shooting){
 
-            if(_currentTarget.isDestroyed()){
+            if(!_currentTarget || _currentTarget.isDestroyed()){
                 _shooting = false;
                 _currentTarget = null;
             }
@@ -82,14 +84,24 @@ public class Unit extends Entity {
 
                 if(Math.sqrt((_posX - _positionXHelper) * (_posX - _positionXHelper) + ( _posY - _positionYHelper) * ( _posY - _positionYHelper)) <= _range){
 
-
                     _currentTarget = _shootableEnemyEntities[i];
-
                     _shooting = true;
 
                 }
+                if(Game.getInstance().getPlayerName() == _owner && _entityName == "MT2"){
+                    _shootableEnemyEntities[i].debugVisuals(true);
+                }
+
 
             }
+
+            for (var j:int = 0; j < _shootableEnemyEntities.length; j++) {
+                if(Game.getInstance().getPlayerName() == _owner && _entityName == "MT2"){
+                    trace(_shootableEnemyEntities[j].getEntityName());
+                }
+
+            }
+
         }
 
     }
@@ -123,10 +135,8 @@ public class Unit extends Entity {
 
 
     override public function setOwner(owner:String):void {
-
         super.setOwner(owner);
-        _shootableEnemyEntities = _owner == "playerOne" ? Game.getInstance().getEntitiesSubGroup("shootablePlayerTwoEntities") : Game.getInstance().getEntitiesSubGroup("shootablePlayerOneEntities");
-
+        _shootableEnemyEntities = EntityManager.getInstance().getShootableEnemyEntities(this.getOwner());
     }
 
     private function calculateNewPath():void {
@@ -165,8 +175,8 @@ public class Unit extends Entity {
 
 
     override public function destroy():void {
-        super.destroy();
         _spawner.unitDestroyed(this);
+        super.destroy();
     }
 }
 }

@@ -1,4 +1,6 @@
-package entities {
+package entities.visuals {
+import entities.*;
+
 import starling.display.DisplayObject;
 import starling.display.Image;
 import starling.utils.Color;
@@ -9,6 +11,7 @@ public class Visuals implements IVisuals{
     protected var _entityShape:Image;
     protected var _graphics:DisplayObject;
     protected var _preGraphics:DisplayObject;
+    protected var _entity:Entity;
 
     public function Visuals() {
 
@@ -17,6 +20,7 @@ public class Visuals implements IVisuals{
     //override this to change entity's visual behavior
     public function build(entity:Entity):void {
 
+        _entity = entity;
         //graphics
         _entityName = entity.getEntityName();
         _entityShape = new Image(ResourceManager.getAssetManager().getTexture(_entityName));
@@ -66,8 +70,13 @@ public class Visuals implements IVisuals{
         _entityShape.color = color;
     }
 
-    public function debug():void {
-        // implement debug features;
+    public function debug(value:Boolean):void {
+        if(value){
+            setColor(Color.AQUA);
+        }
+        else{
+            setSide(_entity.getOwner());
+        }
     }
 
     public function destroy():void {
@@ -79,7 +88,10 @@ public class Visuals implements IVisuals{
         }
     }
 
-
+    public function updateGraphics():void {
+        _graphics.x = _entity.getPosition().x;
+        _graphics.y = _entity.getPosition().y;
+    }
 
 
 

@@ -36,7 +36,7 @@ public class AoEBullet extends NormalBullet implements IBullet {
 
         }
 
-        _AoEFill.color = Game.getInstance().getEntityColorByID(_id);
+        _AoEFill.color = EntityManager.getInstance().getEntityColorByID(_id);
         _AoEFill.pivotX = _AoEFill.pivotY = _AoEFill.width / 2;
         _AoEFill.x = _posX;
         _AoEFill.y = _posY;
@@ -68,7 +68,7 @@ public class AoEBullet extends NormalBullet implements IBullet {
     override public function setOwner(owner:String):void {
 
         super.setOwner(owner);
-        _shootableEnemyEntities = _owner == "playerOne" ? Game.getInstance().getEntitiesSubGroup("shootablePlayerTwoEntities") : Game.getInstance().getEntitiesSubGroup("shootablePlayerOneEntities");
+        _shootableEnemyEntities = EntityManager.getInstance().getShootableEnemyEntities(this.getOwner());
 
     }
 

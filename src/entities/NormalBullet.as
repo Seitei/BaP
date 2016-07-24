@@ -18,6 +18,10 @@ public class NormalBullet extends Entity implements IBullet {
 
     }
 
+    public function getTarget():Entity {
+        return _currentTarget;
+    }
+
     public function setDamage(value:Number):void {
         _damage = value;
     }
@@ -85,10 +89,6 @@ public class NormalBullet extends Entity implements IBullet {
 
 
     }
-
-
-
-
 
 
 

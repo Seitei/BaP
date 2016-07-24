@@ -1,4 +1,5 @@
-package entities {
+package entities.visuals {
+import entities.*;
 
 import starling.display.BlendMode;
 import starling.display.Image;
@@ -16,6 +17,8 @@ public class SpawnerVisuals extends Visuals implements IVisuals{
     }
 
     override public function build(entity:Entity):void {
+
+        _entity = entity;
 
         //graphics
         var container:Sprite = new Sprite();

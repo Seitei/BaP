@@ -80,6 +80,24 @@ public class Shop extends Sprite{
                 entityName = EntitiesData.TOWERT3;
                 break;
 
+            case Keyboard.R:
+                entityName = EntitiesData.CB1;
+                break;
+
+            case Keyboard.F:
+                entityName = EntitiesData.CB2;
+                break;
+
+            case Keyboard.T:
+                entityName = EntitiesData.ROCKT1;
+                break;
+
+            case Keyboard.G:
+                entityName = EntitiesData.ROCKT2;
+                break;
+
+
+
         }
 
         if(entityName){
@@ -130,7 +148,6 @@ public class Shop extends Sprite{
 
     private function checkPrice(entityName:String):Boolean {
 
-        return true;
         return _game.getPlayer().getCredits() >= EntitiesData.data[entityName][EntitiesData.PRICE];
 
     }
@@ -181,6 +198,8 @@ public class Shop extends Sprite{
             _game.getPlayer().updateCredits(-EntitiesData.data[_entityName][EntitiesData.PRICE]);
             dispatchEventWith("entityPlaced", false, {entityName: _entityName, position: _entityToPlace.getPosition()});
             Game.getInstance().removeEventListener(TouchEvent.TOUCH, onTouch);
+            Game.getInstance().addEventListener(TouchEvent.TOUCH, onPreTouch);
+
             _entityToPlace.destroy();
 
         }

@@ -1,4 +1,6 @@
 package entities {
+import entities.visuals.SpawnerVisuals;
+
 public class Spawner extends Entity implements IBuyable, ISpawner{
 
     private var _maxUnits:int = 5;

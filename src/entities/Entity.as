@@ -1,5 +1,7 @@
 package entities {
 
+import entities.visuals.IVisuals;
+
 import flash.events.TimerEvent;
 import flash.geom.Point;
 import flash.utils.Timer;
@@ -23,6 +25,7 @@ public class Entity{
     protected var _graphics:DisplayObject;
     protected var _preGraphics:DisplayObject;
     private var _timer:Timer;
+
 
     public function Entity(id:int, entityType:String, entityName:String) {
 
@@ -77,8 +80,7 @@ public class Entity{
     }
 
     protected function updateGraphics():void {
-        _graphics.x = _posX;
-        _graphics.y = _posY;
+        _visual.updateGraphics();
     }
 
     protected function updatePreGraphics():void {
@@ -133,13 +135,17 @@ public class Entity{
         return _destroyed;
     }
 
+    public function get entitySize():Number {
+        return _entitySize;
+    }
+
     public function destroy():void {
 
         _destroyed = true;
 
         //dummy entities have no ID
         if(_id != -1){
-            Game.getInstance().addToDestroy(this);
+            EntityManager.getInstance().destroyEntity(this);
         }
 
         _visual.destroy();
@@ -148,15 +154,12 @@ public class Entity{
 
     }
 
-    public function debugVisuals(color:uint):void {
+    public function debugVisuals(value:Boolean):void {
 
-        _visual.debug();
+        _visual.debug(value);
 
     }
 
-    public function get entitySize():Number {
-        return _entitySize;
-    }
 
 
 

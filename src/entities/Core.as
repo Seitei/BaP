@@ -21,11 +21,8 @@ public class Core extends Entity {
     }
 
 
-
-
-
-
-
-
+    override public function update():void {
+        debugVisuals(false);
+    }
 }
 }

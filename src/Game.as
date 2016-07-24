@@ -3,6 +3,9 @@ package {
 import entities.EntitiesData;
 import entities.Entity;
 import entities.EntityFactory;
+import entities.EntityManager;
+import entities.ISpawner;
+import entities.Spawner;
 
 import flash.filesystem.File;
 import flash.geom.Point;
@@ -33,19 +36,16 @@ public class Game extends Sprite {
     private static var _instance:Game;
     private var _background:Image;
     private var _assets:AssetManager;
-    private var _entities:Vector.<Entity>;
     private var _net:NetConnect;
-    private var _entitiesSubGroups:Dictionary;
-    private var _entitiesByID:Dictionary;
     private var _entitiesLayer:Sprite;
     private var _gsm:GameStateMachine;
     private var _corePlayerOne:Entity;
     private var _corePlayerTwo:Entity;
     private var _player:Player;
-    private var _entitiesToDestroy:Array;
     private var _hudLayer:HudLayer;
     private var _shop:Shop;
     private var _uiElements:UIElements;
+    private var _entities:EntityManager;
 
     public function Game() {
 
@@ -81,23 +81,13 @@ public class Game extends Sprite {
 
     private function init():void {
 
+        _entities = EntityManager.getInstance();
         ResourceManager.addAssetManager(_assets);
         _background = new Image(ResourceManager.getAssetManager().getTexture("background"));
         addChild(_background);
 
         _entitiesLayer = new Sprite();
         addChild(_entitiesLayer);
-
-        //TODO change this to something more organized
-        _entitiesToDestroy = new Array();
-        _entities = new <Entity>[];
-        _entitiesSubGroups = new Dictionary();
-        _entitiesByID = new Dictionary();
-
-        _entitiesSubGroups["playerOne"] = new Vector.<Entity>;
-        _entitiesSubGroups["playerTwo"] = new Vector.<Entity>;
-        _entitiesSubGroups["shootablePlayerOneEntities"] = new Vector.<Entity>;
-        _entitiesSubGroups["shootablePlayerTwoEntities"] = new Vector.<Entity>;
 
         _player = new Player();
 
@@ -120,8 +110,6 @@ public class Game extends Sprite {
         addChild(_uiElements);
 
         initStateMachine();
-
-
 
     }
 
@@ -177,9 +165,9 @@ public class Game extends Sprite {
             }
 
             message.data.params.wayPoints = invertedArray;
-            _entitiesByID[message.data.id].setWayPoints(invertedArray);
+            _entities.updateEntityByID(message.data.id, "setWayPoints", invertedArray);
 
-            HudLayer.getInstance().addPath(_entitiesByID[message.data.id]);
+            HudLayer.getInstance().addPath(Spawner(_entities.getEntityByID(message.data.id)));
             HudLayer.getInstance().drawPath(message.data.id);
 
         }
@@ -267,25 +255,7 @@ public class Game extends Sprite {
 
     private function addEntity(entity:Entity, send:Boolean):void {
 
-        _entitiesSubGroups[entity.getOwner()].push(entity);
-        _entitiesSubGroups[entity.getOwner()].push(entity);
-        _entities.push(entity);
-        _entitiesByID[entity.getId()] = entity;
-
-        if(entity.getEntityType() != "bullet"){
-
-            if(entity.getOwner() == "playerOne"){
-
-                _entitiesSubGroups["shootablePlayerOneEntities"].push(entity);
-
-            }
-
-            if(entity.getOwner() == "playerTwo"){
-
-                _entitiesSubGroups["shootablePlayerTwoEntities"].push(entity);
-
-            }
-        }
+        _entities.addEntity(entity);
 
         _entitiesLayer.addChild(entity.getGraphics());
 
@@ -299,25 +269,6 @@ public class Game extends Sprite {
         return _entitiesLayer;
     }
 
-    public function getEntityByID(entityID:int):Entity {
-        return _entitiesByID[entityID];
-    }
-
-    public function getEntitiesSubGroup(subGroup:String):Vector.<Entity> {
-
-        return _entitiesSubGroups[subGroup];
-
-    }
-
-    public function getCore(player:String):Entity {
-        return player == "playerOne" ? _corePlayerOne : _corePlayerTwo;
-    }
-
-
-    public function getEntities():Vector.<Entity> {
-        return _entities;
-    }
-
     public function getPlayerName():String {
 
         return _player.getPlayerName();
@@ -325,44 +276,9 @@ public class Game extends Sprite {
     }
 
     public function getOppositePlayerName():String {
-
         return _player.getPlayerName() == "playerOne" ? "playerTwo" : "playerOne";
-
     }
 
-    public function addToDestroy(entity:Entity):void {
-
-        _entitiesToDestroy.push(entity);
-
-    }
-
-    public function getEntityColorByID(id:int):uint {
-
-        return getEntityByID(id).getOwner() == Game.getInstance().getOppositePlayerName() ? ResourceManager.RED : ResourceManager.GREEN;
-
-    }
-
-    public function destroyEntity(entity:Entity):void {
-
-        _entities.splice(_entities.indexOf(entity), 1);
-        delete _entitiesByID[entity.getId()];
-
-    }
-
-    public function checkEntitiesToDestroy():void {
-
-        if(_entitiesToDestroy.length > 0){
-
-            for(var i:int = 0; i < _entitiesToDestroy.length; i++){
-
-                destroyEntity(_entitiesToDestroy[i]);
-
-            }
-        }
-
-        _entitiesToDestroy.splice(0);
-
-    }
 
     public function getPlayer():Player {
         return _player;

@@ -1,5 +1,6 @@
 package ui {
 import entities.Entity;
+import entities.EntityManager;
 import entities.Spawner;
 
 import flash.geom.Point;
@@ -108,7 +109,7 @@ public class HudLayer extends Sprite{
             pointTwo = _paths[id][i + 1];
 
             var line:Image = new Image(ResourceManager.getAssetManager().getTexture("line_fill_placing"));
-            line.color = Game.getInstance().getEntityColorByID(id);
+            line.color = EntityManager.getInstance().getEntityColorByID(id);
             line.x = pointOne.x;
             line.y = pointOne.y;
             line.rotation = Math.atan2(pointTwo.y - pointOne.y, pointTwo.x - pointOne.x);

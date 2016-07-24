@@ -1,4 +1,9 @@
 package entities {
+import entities.visuals.IVisuals;
+import entities.visuals.LaserVisuals;
+import entities.visuals.SpawnerVisuals;
+import entities.visuals.Visuals;
+
 import flash.geom.Point;
 import flash.utils.Dictionary;
 
@@ -58,23 +63,31 @@ public class EntityFactory {
 
 
             case EntitiesData.NORMAL_BULLET:
-
                 entity = new NormalBullet(id, entityName);
                 visuals = new Visuals();
                 break;
 
             case EntitiesData.AOE_BULLET:
-
                 entity = new AoEBullet(id, entityName);
                 visuals = new Visuals();
                 break;
 
-
+            case EntitiesData.LASER_BULLET:
+                entity = new LaserBullet(id, entityName);
+                visuals = new LaserVisuals();
+                break;
 
             case EntitiesData.CB1:
             case EntitiesData.CB2:
 
                 entity = new CreditsBooster(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.PRICE], _data[EntitiesData.CREDITS_RATE]);
+                visuals = new Visuals();
+                break;
+
+            case EntitiesData.ROCKT1:
+            case EntitiesData.ROCKT2:
+
+                entity = new Rock(id, entityName, _data[EntitiesData.HITPOINTS], _data[EntitiesData.PRICE]);
                 visuals = new Visuals();
                 break;
 

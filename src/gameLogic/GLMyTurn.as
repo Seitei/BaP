@@ -1,5 +1,6 @@
 package gameLogic {
 import entities.Entity;
+import entities.EntityManager;
 import entities.IExecuteOnTurnStart;
 import entities.ISpawner;
 
@@ -31,7 +32,7 @@ public class GLMyTurn implements IGameLogic{
         _game = Game.getInstance();
         _shop = Shop.getInstance();
         _shop.addEventListener("entityPlaced", onEntityPlaced);
-        _entities = _game.getEntities();
+        _entities = EntityManager.getInstance().getEntitites();
         _executeOnTurnStartEntities = new <IExecuteOnTurnStart>[];
 
     }

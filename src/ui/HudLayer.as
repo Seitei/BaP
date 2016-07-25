@@ -185,6 +185,8 @@ public class HudLayer extends Sprite{
 
             _onPathFinished(_paths[_currentEntityID]);
 
+            Shop.getInstance().activateShop();
+
         }
 
     }

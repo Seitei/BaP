@@ -13,6 +13,7 @@ public class NetConnect extends EventDispatcher{
     public static const ENTITY_ADDED:String = "entityAdded";
     public static const TURN_ENDED:String = "turnEnded";
     public static const UPDATE_ENTITY_DATA:String = "updateEntityData";
+    public static const DEBUG:String = "debug";
 
     private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
     private const DEVKEY:String = "cde41fe05bb01817e82e5398-2ab5d983d09f";
@@ -69,7 +70,7 @@ public class NetConnect extends EventDispatcher{
                 break;
         }
 
-        trace(event.info.code);
+        //trace(event.info.code);
 
     }
 

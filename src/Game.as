@@ -4,13 +4,12 @@ import entities.EntitiesData;
 import entities.Entity;
 import entities.EntityFactory;
 import entities.EntityManager;
-import entities.ISpawner;
 import entities.Spawner;
 
 import flash.filesystem.File;
 import flash.geom.Point;
 import flash.net.registerClassAlias;
-import flash.utils.Dictionary;
+import flash.ui.Keyboard;
 
 import gameLogic.GLEnemyTurn;
 import gameLogic.GLMyTurn;
@@ -22,6 +21,7 @@ import net.NetConnect;
 import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.Event;
+import starling.events.KeyboardEvent;
 import starling.utils.AssetManager;
 
 import ui.HudLayer;
@@ -39,13 +39,13 @@ public class Game extends Sprite {
     private var _net:NetConnect;
     private var _entitiesLayer:Sprite;
     private var _gsm:GameStateMachine;
-    private var _corePlayerOne:Entity;
-    private var _corePlayerTwo:Entity;
+    private var _core:Entity;
     private var _player:Player;
     private var _hudLayer:HudLayer;
     private var _shop:Shop;
     private var _uiElements:UIElements;
     private var _entities:EntityManager;
+    private var _debugging:Boolean = true;
 
     public function Game() {
 
@@ -111,6 +111,10 @@ public class Game extends Sprite {
 
         initStateMachine();
 
+        if(_debugging){
+            addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownDebugging);
+        }
+
     }
 
     private function initStateMachine():void {
@@ -139,6 +143,10 @@ public class Game extends Sprite {
             case NetConnect.TURN_ENDED:
                 onTurnEnded(message.data.player);
                 break;
+
+            case NetConnect.DEBUG:
+                receiveDebugData(message.data);
+                break;
         }
 
     }
@@ -159,8 +167,7 @@ public class Game extends Sprite {
             for(var i:int = 0; i < originalArray.length; i++){
 
                 invertedArray.push(new Point);
-                invertedArray[i].x = stage.stageWidth - originalArray[i].x;
-                invertedArray[i].y = stage.stageHeight - originalArray[i].y;
+                invertedArray[i] = invertCoordinates(originalArray[i]);
 
             }
 
@@ -173,6 +180,13 @@ public class Game extends Sprite {
         }
 
 
+    }
+
+    private function invertCoordinates(point:Point):Point {
+
+        point.x = stage.stageWidth - point.x;
+        point.y = stage.stageWidth - point.y;
+        return point;
     }
 
     public function onTurnEnded(player:String):void {
@@ -207,13 +221,13 @@ public class Game extends Sprite {
 
     private function onEntityAdded(message:Object):void {
 
-        var reflectedPositionX:int = stage.stageWidth - message.data.position.x;
-        var reflectedPositionY:int = stage.stageHeight - message.data.position.y;
-
-        createEntity(message.data.type, message.data.owner, new Point(reflectedPositionX, reflectedPositionY), false);
+        createEntity(message.data.type, message.data.owner, invertCoordinates(message.data.position), false);
 
         if(message.data.type == EntitiesData.CORE){
-            HudLayer.getInstance().setEnemyCorePosition(new Point(reflectedPositionX, reflectedPositionY));
+            if(!_core){
+                addCore();
+            }
+            HudLayer.getInstance().setEnemyCorePosition(message.data.position);
         }
 
     }
@@ -225,13 +239,13 @@ public class Game extends Sprite {
 
             _player.setPlayerName("playerOne");
             _gsm.goTo(GameStateMachine.MY_TURN);
+            addCore();
 
         } else {
             _player.setPlayerName("playerTwo");
             _gsm.goTo(GameStateMachine.ENEMY_TURN);
         }
 
-        addCore();
     }
 
 
@@ -239,7 +253,7 @@ public class Game extends Sprite {
 
     private function addCore():void {
 
-        _corePlayerOne = createEntity(EntitiesData.CORE, _player.getPlayerName(), new Point(stage.stageWidth / 2, stage.stageHeight * 0.9), true);
+        _core = createEntity(EntitiesData.CORE, _player.getPlayerName(), new Point(stage.stageWidth / 2, stage.stageHeight * 0.9), true);
 
     }
 
@@ -283,6 +297,87 @@ public class Game extends Sprite {
     public function getPlayer():Player {
         return _player;
     }
+
+
+    ///////////////////////////////////// DEBUG /////////////////////////////////////
+
+
+    public function onKeyDownDebugging(e:KeyboardEvent):void {
+
+        if(e.keyCode == Keyboard.ENTER){
+            sendMessage({type: "debug", data: compileDebugData()});
+        }
+    }
+
+    public function receiveDebugData(data:Array):void {
+
+        var myData:Array = compileDebugData();
+
+        //compare length
+        if(data.length != myData.length){
+            trace("Error: amount of units differ!");
+        }
+
+        var state:String = "all good!";
+        var precision:Number = 0.0001;
+
+        for(var i:int = 0; i < data.length; i++) {
+
+            if(data[i].id == myData[i].id){
+
+                if(data[i].entityName == myData[i].entityName && data[i].position.subtract(invertCoordinates(myData[i].position)).length < precision){
+
+                    //all good
+
+                }
+                else {
+
+                    state = "went to shit";
+
+                    if(data[i].entityName != myData[i].entityName){
+                       trace("different Name: ", data[i].entityName, "  ", myData[i].entityName);
+                   }
+
+                   if(data[i].position.subtract(myData[i].position).length > precision){
+                       trace("different position: ", "entityName: ", data[i].entityName, "  ", myData[i].entityName, data[i].position, "  ", myData[i].position);
+
+                   }
+
+                }
+
+
+            }
+
+        }
+
+        trace(state);
+
+    }
+
+    public function compileDebugData():Array {
+
+        var data:Array = new Array();
+
+        for (var i:int = 0; i < _entities.getEntitites().length; i++) {
+
+            var object:Object = new Object();
+
+            object.id = _entities.getEntitites()[i].getId();
+            object.position = _entities.getEntitites()[i].getPosition();
+            object.entityName = _entities.getEntitites()[i].getEntityName();
+
+            data.push(object);
+
+
+        }
+
+        return data;
+
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 

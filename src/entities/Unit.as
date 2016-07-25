@@ -88,20 +88,7 @@ public class Unit extends Entity {
                     _shooting = true;
 
                 }
-                if(Game.getInstance().getPlayerName() == _owner && _entityName == "MT2"){
-                    _shootableEnemyEntities[i].debugVisuals(true);
-                }
-
-
             }
-
-            for (var j:int = 0; j < _shootableEnemyEntities.length; j++) {
-                if(Game.getInstance().getPlayerName() == _owner && _entityName == "MT2"){
-                    trace(_shootableEnemyEntities[j].getEntityName());
-                }
-
-            }
-
         }
 
     }

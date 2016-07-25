@@ -29,7 +29,7 @@ public class EntityFactory {
         _data = EntitiesData.data[entityName];
         var visuals:IVisuals;
 
-        //trace(id, entityName);
+        //trace(id, "  ", entityName);
 
         switch(entityName){
 

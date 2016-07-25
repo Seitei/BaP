@@ -147,7 +147,7 @@ public class Shop extends Sprite{
     }
 
     private function checkPrice(entityName:String):Boolean {
-
+        return true;
         return _game.getPlayer().getCredits() >= EntitiesData.data[entityName][EntitiesData.PRICE];
 
     }
@@ -162,7 +162,6 @@ public class Shop extends Sprite{
             _helperPoint.y = hover.globalY;
 
         }
-
 
     }
 
@@ -193,6 +192,7 @@ public class Shop extends Sprite{
                 return;
             }
 
+            deactivateShop();
             Mouse.show();
             _positioning = false;
             _game.getPlayer().updateCredits(-EntitiesData.data[_entityName][EntitiesData.PRICE]);

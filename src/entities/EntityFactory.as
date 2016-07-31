@@ -12,6 +12,7 @@ public class EntityFactory {
     private static var _instance:EntityFactory;
     private var _autoIncrement:int;
     private var _data:Dictionary;
+    private var _spawnersIncrement:int;
 
     public function createEntity(entityName:String, owner:String, position:Point = null, dummy:Boolean = false):Entity {
 
@@ -22,8 +23,19 @@ public class EntityFactory {
         var id:int = -1;
 
         if(!dummy){
+
             id = owner == "playerOne" ? 100000 : 200000;
-            id += ++_autoIncrement;
+
+            //TODO this is meant to avoid mixing IDs of spawners with other entities
+            //TODO when any desync issues are detected and fixed, remove this, or keep it for debugging reasons
+
+            if(entityName.substr(0, 1) == "S"){
+                id += 50000;
+                id += ++_spawnersIncrement;
+            }
+            else {
+                id += ++_autoIncrement;
+            }
         }
 
         _data = EntitiesData.data[entityName];

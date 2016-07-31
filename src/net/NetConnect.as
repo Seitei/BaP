@@ -70,7 +70,7 @@ public class NetConnect extends EventDispatcher{
                 break;
         }
 
-        //trace(event.info.code);
+        trace(event.info.code);
 
     }
 

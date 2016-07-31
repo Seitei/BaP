@@ -37,8 +37,9 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
         if(_spawnCounter == _spawnRate * 60){
             var unit:Unit = Unit(Game.getInstance().createEntity(_entityToSpawn, _owner, getPosition(), false));
             unit.setWayPoints(_wayPoints);
-            unit.setSpawner(this);
             _units.push(unit);
+            unit.setSpawner(this);
+
 
             _spawnCounter = 0;
             _spawnedUnits ++;
@@ -50,6 +51,9 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
         return _entityToSpawn;
     }
 
+    public function getUnits():Vector.<Unit> {
+        return _units;
+    }
     public function getPrice():Number {
         return _price;
     }
@@ -64,6 +68,8 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
         spawn();
 
     }
+
+
 
     public function setWayPoints(array:Array):void {
         _wayPoints = array;

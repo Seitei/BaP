@@ -1,8 +1,13 @@
 package entities {
-import starling.utils.Color;
+import starling.animation.Transitions;
+import starling.animation.Tween;
+import starling.core.Starling;
 
 public class Unit extends Entity {
 
+    private static const DISTRIBUTION_INCREMENT:Number = 0.1;
+    private static const ACCELERATION:Number = 0.5;
+    private static const DISPERSION_TIME:int = 2 * 60;
     private var _wayPoints:Array;
     private var _counter:int;
     private var _shootRate:Number;
@@ -17,13 +22,18 @@ public class Unit extends Entity {
     private var _positionXHelper:Number;
     private var _positionYHelper:Number;
     private var _range:Number;
-    private var _distanceIncrement:Number;
-    private var _incrementX:Number;
-    private var _incrementY:Number;
+    private var _incrementX:Number = 0;
+    private var _incrementY:Number = 0;
     private var _currentWayPoint:int;
     private var _speed:Number;
     private var _spawner:Spawner;
     private var _bulletAoERadius:Number;
+    private var _distributionIncrementX:Number = 0;
+    private var _distributionIncrementY:Number = 0;
+    private var _recalculatePath:Boolean;
+    private var _positionIncrement:Object;
+    private var _dispersionTime:int;
+
 
 
     public function Unit(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, bulletSpeed:Number, bulletDamage:Number, bulletAoERadius:Number, range:Number, speed:Number) {
@@ -38,11 +48,39 @@ public class Unit extends Entity {
         _bulletAoERadius = bulletAoERadius;
         _bulletSpeed = bulletSpeed;
         _hitPoints = hitPoints;
+        _positionIncrement = new Object();
+        _positionIncrement.x = 0;
+        _positionIncrement.y = 0;
+        _positionIncrement.distanceIncrement = 0;
 
     }
 
     public function setSpawner(spawner:Spawner):void {
         _spawner = spawner;
+        distributeSquadronPosition();
+    }
+
+    private function distributeSquadronPosition():void {
+
+        var position:int = _spawner.getUnits().indexOf(this);
+
+        switch(position){
+
+            case 0:
+                break;
+            case 1:
+                _distributionIncrementX += DISTRIBUTION_INCREMENT;
+                break;
+            case 2:
+                _distributionIncrementX -= DISTRIBUTION_INCREMENT;
+                break;
+            case 3:
+                _distributionIncrementY += DISTRIBUTION_INCREMENT;
+                break;
+            case 4:
+                _distributionIncrementY -= DISTRIBUTION_INCREMENT;
+                break;
+        }
     }
 
     private function executeShot():void {
@@ -69,6 +107,9 @@ public class Unit extends Entity {
             if(!_currentTarget || _currentTarget.isDestroyed()){
                 _shooting = false;
                 _currentTarget = null;
+                _recalculatePath = true;
+                _positionIncrement.x = _positionIncrement.y = _positionIncrement.distanceIncrement = 0;
+                _dispersionTime = 0;
             }
             else {
                 executeShot();
@@ -85,7 +126,7 @@ public class Unit extends Entity {
                 if(Math.sqrt((_posX - _positionXHelper) * (_posX - _positionXHelper) + ( _posY - _positionYHelper) * ( _posY - _positionYHelper)) <= _range){
 
                     _currentTarget = _shootableEnemyEntities[i];
-                    _shooting = true;
+                    accelerateMovement(0, onTweenComplete);
 
                 }
             }
@@ -96,24 +137,35 @@ public class Unit extends Entity {
     private function move():void {
 
         if(_shooting){
-            return;
+
+            if(_dispersionTime <= DISPERSION_TIME){
+
+                _posX += _distributionIncrementX;
+                _posY += _distributionIncrementY
+
+            }
+
+            _dispersionTime ++;
+
         }
+        else {
 
-        if(_distanceWalked == 0 || _distanceWalked >= _distanceToWayPoint){
+            if(_currentWayPoint == 0 || _distanceWalked >= _distanceToWayPoint || _recalculatePath){
 
-            calculateNewPath();
+                calculateNewPath();
+
+            }
+
+            _distanceWalked += _positionIncrement.distanceIncrement;
+
+            _posX += _positionIncrement.x;
+            _posY += _positionIncrement.y;
 
         }
-
-        _distanceWalked += _distanceIncrement;
-
-        _posX += _incrementX;
-        _posY += _incrementY;
 
         updateGraphics();
 
     }
-
 
     override public function update():void {
         move();
@@ -128,11 +180,16 @@ public class Unit extends Entity {
 
     private function calculateNewPath():void {
 
-        _distanceWalked = 0;
-        _currentWayPoint ++;
+        if(!_recalculatePath || _currentWayPoint == 0){
+            _currentWayPoint ++;
+        }
 
-        var segmentX:Number = _wayPoints[_currentWayPoint].x - _wayPoints[_currentWayPoint - 1].x;
-        var segmentY:Number = _wayPoints[_currentWayPoint].y - _wayPoints[_currentWayPoint - 1].y;
+        _recalculatePath = false;
+
+        _distanceWalked = 0;
+
+        var segmentX:Number = _wayPoints[_currentWayPoint].x - _posX;
+        var segmentY:Number = _wayPoints[_currentWayPoint].y - _posY;
 
         var rotation:Number = Math.atan2(segmentY, segmentX);
         _distanceToWayPoint = Math.sqrt((segmentX * segmentX) + ( segmentY * segmentY));
@@ -140,14 +197,46 @@ public class Unit extends Entity {
         _incrementX = Math.cos(rotation) * _speed;
         _incrementY = Math.sin(rotation) * _speed;
 
-        _distanceIncrement = Math.sqrt((_incrementX * _incrementX) + ( _incrementY * _incrementY));
-
         setRotation(rotation + 90 * Math.PI / 180);
+
+        if(_positionIncrement.distanceIncrement == 0){
+
+            accelerateMovement(1);
+
+        }
+        else {
+
+            _positionIncrement.x = _incrementX;
+            _positionIncrement.y = _incrementY;
+
+        }
+    }
+
+    private function accelerateMovement(acceleration:Number, onComplete:Function = null):void {
+
+        var tween:Tween = new Tween(_positionIncrement, ACCELERATION, Transitions.LINEAR);
+        Starling.juggler.add(tween);
+        tween.animate("x", _incrementX * acceleration);
+        tween.animate("y", _incrementY * acceleration);
+        tween.animate("distanceIncrement", _speed * acceleration);
+
+        if(onComplete){
+            tween.onComplete = onComplete;
+        }
 
     }
 
+    private function onTweenComplete():void {
+        _shooting = true;
+        setRotation(-Math.PI / 2 + Math.atan2(_posY - _positionYHelper, _posX - _positionXHelper));
+    }
+
     private function setRotation(rotation:Number):void {
-        _visual.getGraphics().rotation = rotation;
+
+        var tween:Tween = new Tween(_visual.getGraphics(), ACCELERATION / 2, Transitions.LINEAR);
+        Starling.juggler.add(tween);
+        tween.animate("rotation", rotation);
+
     }
 
 

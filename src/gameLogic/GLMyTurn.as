@@ -82,6 +82,9 @@ public class GLMyTurn implements IGameLogic{
             MouseUtils.setMouseCursor();
             showPath(entity);
         }
+        else {
+            Shop.getInstance().activateShop();
+        }
 
     }
 

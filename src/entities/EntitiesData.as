@@ -56,7 +56,7 @@ public class EntitiesData {
     data[SMT1] = new Dictionary();
 
     data[SMT1][HITPOINTS]       = 100;
-    data[SMT1][MAX_UNITS]       = 3;
+    data[SMT1][MAX_UNITS]       = 5;
     data[SMT1][SPAWN_RATE]      = 1;
     data[SMT1][ENTITY_TO_SPAWN] = MT1;
     data[SMT1][PRICE]           = 8;
@@ -112,7 +112,7 @@ public class EntitiesData {
     data[MT1][HITPOINTS]       = 20;
     data[MT1][SHOOT_RATE]      = 0.7;
     data[MT1][BULLET]          = NORMAL_BULLET;
-    data[MT1][RANGE]           = 35;
+    data[MT1][RANGE]           = 120;
     data[MT1][DAMAGE]          = 5;
     data[MT1][SPEED]           = 1;
     data[MT1][AOE_RADIUS]      = 1;
@@ -236,7 +236,7 @@ public class EntitiesData {
 
     data[ROCKT2] = new Dictionary();
 
-    data[ROCKT2][HITPOINTS]           = 1500;
+    data[ROCKT2][HITPOINTS]           = 150;
     data[ROCKT2][PRICE]               = 20;
 
 

@@ -7,7 +7,7 @@ import starling.events.Event;
 
 public class GLPlay implements IGameLogic{
 
-    private static const PLAY_TIME_DURATION:int = 5 * 60;
+    private static const PLAY_TIME_DURATION:int = 50 * 60;
 
     private var _turnTime:int;
     private var _game:Game;

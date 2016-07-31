@@ -199,8 +199,6 @@ public class HudLayer extends Sprite{
         _activeSegmentTwo.rotation = Math.atan2(posY - _activeSegmentTwo.y, posX - _activeSegmentTwo.x);
         _activeSegmentTwo.scaleX = Math.sqrt((posX - _activeSegmentTwo.x) * (posX - _activeSegmentTwo.x) + ( _activeSegmentTwo.y - posY) * ( _activeSegmentTwo.y - posY)) / 4;
 
-
-
     }
 
 

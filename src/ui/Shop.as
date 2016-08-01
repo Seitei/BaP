@@ -147,7 +147,7 @@ public class Shop extends Sprite{
     }
 
     private function checkPrice(entityName:String):Boolean {
-        return true;
+
         return _game.getPlayer().getCredits() >= EntitiesData.data[entityName][EntitiesData.PRICE];
 
     }

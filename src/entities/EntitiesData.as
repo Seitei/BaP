@@ -236,7 +236,7 @@ public class EntitiesData {
 
     data[ROCKT2] = new Dictionary();
 
-    data[ROCKT2][HITPOINTS]           = 150;
+    data[ROCKT2][HITPOINTS]           = 1500;
     data[ROCKT2][PRICE]               = 20;
 
 

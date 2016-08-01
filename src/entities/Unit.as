@@ -235,10 +235,9 @@ public class Unit extends Entity {
 
         var tween:Tween = new Tween(_visual.getGraphics(), ACCELERATION / 2, Transitions.LINEAR);
         Starling.juggler.add(tween);
-        tween.animate("rotation", rotation);
+        tween.rotateTo(rotation);
 
     }
-
 
 
     public function setWayPoints(array:Array):void {

@@ -12,9 +12,10 @@ public class Main extends Sprite {
     public function Main() {
 
         _starling = new Starling(Game, stage);
+        //_starling = new Starling(Test, stage);
         _starling.antiAliasing = 4;
         _starling.start();
-        //_starling.showStats = true;
+        _starling.showStats = true;
 
     }
 }

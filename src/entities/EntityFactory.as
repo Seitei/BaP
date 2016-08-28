@@ -84,6 +84,11 @@ public class EntityFactory {
                 visuals = new Visuals();
                 break;
 
+            case EntitiesData.HOMING_BULLET:
+                entity = new HomingBullet(id, entityName);
+                visuals = new Visuals();
+                break;
+
             case EntitiesData.LASER_BULLET:
                 entity = new LaserBullet(id, entityName);
                 visuals = new LaserVisuals();

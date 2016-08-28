@@ -33,6 +33,7 @@ public class EntitiesData {
     public static const RT2:String = "RT2";
     public static const RT3:String = "RT3";
     public static const NORMAL_BULLET:String = "NORMAL_BULLET";
+    public static const HOMING_BULLET:String = "HOMING_BULLET";
     public static const AOE_BULLET:String = "AOE_BULLET";
     public static const LASER_BULLET:String = "LASER_BULLET";
     public static const CB1:String = "CREDITS_BOOSTERT1";
@@ -42,8 +43,11 @@ public class EntitiesData {
     public static const TOWERT3:String = "TOWERT3";
     public static const ROCKT1:String = "ROCKT1";
     public static const ROCKT2:String = "ROCKT2";
+    public static const ABSTRACTS:String = "abstracts";
+    public static const ABSTRACTS_INVERTED:String = "abstractsInverted";
 
     public static var data:Dictionary = new Dictionary();
+
 
     ///////////// CORE /////////////
 
@@ -56,7 +60,7 @@ public class EntitiesData {
     data[SMT1] = new Dictionary();
 
     data[SMT1][HITPOINTS]       = 100;
-    data[SMT1][MAX_UNITS]       = 5;
+    data[SMT1][MAX_UNITS]       = 3;
     data[SMT1][SPAWN_RATE]      = 1;
     data[SMT1][ENTITY_TO_SPAWN] = MT1;
     data[SMT1][PRICE]           = 8;
@@ -110,24 +114,25 @@ public class EntitiesData {
     data[MT1] = new Dictionary();
 
     data[MT1][HITPOINTS]       = 20;
-    data[MT1][SHOOT_RATE]      = 0.7;
+    data[MT1][SHOOT_RATE]      = 0.9;
     data[MT1][BULLET]          = NORMAL_BULLET;
-    data[MT1][RANGE]           = 120;
+    data[MT1][RANGE]           = 100;
     data[MT1][DAMAGE]          = 5;
     data[MT1][SPEED]           = 1;
     data[MT1][AOE_RADIUS]      = 1;
-    data[MT1][BULLET_SPEED]    = 3;
+    data[MT1][BULLET_SPEED]    = 1;
+
 
     data[MT2] = new Dictionary();
 
-    data[MT2][HITPOINTS]       = 75;
+    data[MT2][HITPOINTS]       = 30;
     data[MT2][SHOOT_RATE]      = 0.7;
     data[MT2][BULLET]          = NORMAL_BULLET;
     data[MT2][RANGE]           = 35;
     data[MT2][DAMAGE]          = 7;
-    data[MT2][SPEED]           = 1.5;
+    data[MT2][SPEED]           = 1;
     data[MT2][AOE_RADIUS]      = 1;
-    data[MT2][BULLET_SPEED]    = 3;
+    data[MT2][BULLET_SPEED]    = 1;
 
     data[MT3] = new Dictionary();
 
@@ -243,6 +248,22 @@ public class EntitiesData {
 
 
 
+
+    ///////////// AESTHETICS /////////////
+
+
+    public static function setAbstract(entityName:String, abstracts:Array, abstractsInverted:Array):void {
+        data[entityName][ABSTRACTS] = abstracts;
+        data[entityName][ABSTRACTS_INVERTED] = abstractsInverted;
+    }
+
+
+    public static function getAbstract(entityName:String, type:String):Array {
+        //TODO add the rest of the abstracts
+        return data[MT1][type];
+
+        //return data[entityName][ABSTRACTS];
+    }
 
 
 

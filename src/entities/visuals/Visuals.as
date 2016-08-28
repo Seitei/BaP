@@ -3,6 +3,12 @@ import entities.*;
 
 import starling.display.DisplayObject;
 import starling.display.Image;
+import starling.display.Quad;
+import starling.display.Shape;
+import starling.display.Sprite;
+import starling.display.Sprite;
+import starling.display.Sprite;
+import starling.display.graphics.NGon;
 import starling.utils.Color;
 
 public class Visuals implements IVisuals{
@@ -12,6 +18,7 @@ public class Visuals implements IVisuals{
     protected var _graphics:DisplayObject;
     protected var _preGraphics:DisplayObject;
     protected var _entity:Entity;
+
 
     public function Visuals() {
 
@@ -23,9 +30,11 @@ public class Visuals implements IVisuals{
         _entity = entity;
         //graphics
         _entityName = entity.getEntityName();
-        _entityShape = new Image(ResourceManager.getAssetManager().getTexture(_entityName));
+        _graphics = new Sprite();
 
-        _graphics = _entityShape;
+        _entityShape = new Image(ResourceManager.getAssetManager().getTexture(_entityName));
+        Sprite(_graphics).addChild(_entityShape);
+
         _graphics.pivotX = _graphics.width / 2;
         _graphics.pivotY = _graphics.height / 2;
 
@@ -72,7 +81,17 @@ public class Visuals implements IVisuals{
 
     public function debug(value:Boolean):void {
         if(value){
-            setColor(Color.AQUA);
+            //setColor(Color.AQUA);
+
+            var center:Quad = new Quad(3, 3, Color.AQUA);
+            center.x = center.y = _graphics.width / 2;
+            Sprite(_graphics).addChild(center);
+
+            var circle:NGon = new NGon(_graphics.width * 0.5, 100, _graphics.width * 0.45);
+            circle.x = circle.y = _graphics.width / 2;
+            circle.color = Color.AQUA;
+            Sprite(_graphics).addChild(circle);
+
         }
         else{
             setSide(_entity.getOwner());

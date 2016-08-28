@@ -7,7 +7,10 @@ import flash.geom.Point;
 import flash.ui.Keyboard;
 import flash.ui.Mouse;
 
+import starling.display.Image;
+
 import starling.display.Sprite;
+import starling.events.Event;
 import starling.events.KeyboardEvent;
 import starling.events.Touch;
 import starling.events.TouchEvent;
@@ -24,14 +27,100 @@ public class Shop extends Sprite{
     private var _entityName:String;
     private var _positioning:Boolean;
     private var _helperPoint:Point;
+    private var _selector:Sprite;
+    private var _showingSelector:Boolean;
 
     public function Shop() {
 
         _game = Game.getInstance();
         _helperPoint = new Point();
         Game.getInstance().addEventListener(TouchEvent.TOUCH, onPreTouch);
+        //addEventListener(Event.ADDED_TO_STAGE, onAdded);
+
 
     }
+
+    private function onAdded(event:Event):void {
+
+        buildSelector();
+
+    }
+
+    private function buildSelector():void {
+
+        _selector = new Sprite();
+
+        var array:Array = ["pawn", "knight", "bishop", "rook", "queen"];
+        var center:int = stage.stageWidth / 2;
+
+        for (var i:int = 0; i < 5; i++) {
+
+            var image:Image = new Image(ResourceManager.getAssetManager().getTexture(array[i]));
+            image.name = array[i];
+            image.pivotX = image.pivotY = image.width / 2;
+
+            var posX:int = center + Math.cos(i * (360 / 5) * Math.PI / 180) * stage.stageWidth / 5;
+            var posY:int = center + Math.sin(i * (360 / 5) * Math.PI / 180) * stage.stageWidth / 5;
+
+            image.x = posX;
+            image.y = posY;
+
+            image.addEventListener(TouchEvent.TOUCH, onPieceTouched);
+            _selector.addChild(image);
+
+        }
+
+
+    }
+
+    private function onPieceTouched(event:TouchEvent):void {
+
+        event.stopImmediatePropagation();
+        var began:Touch = event.getTouch(this, TouchPhase.BEGAN);
+
+        if(began){
+            onPieceChosen(Image(event.currentTarget).name);
+        }
+
+    }
+
+
+    private function onPieceChosen(pieceName:String):void {
+
+        var entityName:String;
+
+
+        switch(pieceName){
+
+            case "pawn":
+                entityName = EntitiesData.SMT1;
+                break;
+
+            case "knight":
+                entityName = EntitiesData.SRT1;
+                break;
+
+            case "bishop":
+                entityName = EntitiesData.SRT2;
+                break;
+
+            case "rook":
+                entityName = EntitiesData.TOWERT1;
+                break;
+
+            case "queen":
+                entityName = EntitiesData.TOWERT3;
+                break;
+
+        }
+
+        _entityName = entityName;
+        hideSelector();
+        tryEntity(entityName);
+
+
+    }
+
 
     private function onKeyUp(e:KeyboardEvent):void {
 
@@ -39,6 +128,19 @@ public class Shop extends Sprite{
             cancel();
             return;
         }
+
+
+        /*if(e.keyCode == Keyboard.ENTER){
+            if(_showingSelector){
+                hideSelector();
+            }
+            else {
+                showSelector();
+            }
+
+            return;
+        }*/
+
 
         var entityName:String;
 
@@ -111,6 +213,18 @@ public class Shop extends Sprite{
 
     }
 
+    private function showSelector():void {
+        _showingSelector = true;
+        addChild(_selector);
+        _game.blur(true);
+    }
+
+    private function hideSelector():void {
+        _showingSelector = false;
+        removeChild(_selector);
+        _game.blur(false);
+    }
+
     private function cancel():void {
 
         MouseUtils.reset();
@@ -148,6 +262,7 @@ public class Shop extends Sprite{
 
     private function checkPrice(entityName:String):Boolean {
 
+        return true;
         return _game.getPlayer().getCredits() >= EntitiesData.data[entityName][EntitiesData.PRICE];
 
     }

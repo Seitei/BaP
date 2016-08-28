@@ -22,6 +22,7 @@ import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.KeyboardEvent;
+import starling.filters.BlurFilter;
 import starling.utils.AssetManager;
 
 import ui.HudLayer;
@@ -46,6 +47,7 @@ public class Game extends Sprite {
     private var _uiElements:UIElements;
     private var _entities:EntityManager;
     private var _debugging:Boolean = true;
+
 
     public function Game() {
 
@@ -76,13 +78,14 @@ public class Game extends Sprite {
                 init();
             }
         });
-    }
 
+    }
 
     private function init():void {
 
         _entities = EntityManager.getInstance();
         ResourceManager.addAssetManager(_assets);
+        ResourceManager.loadSWFData();
         _background = new Image(ResourceManager.getAssetManager().getTexture("background"));
         addChild(_background);
 
@@ -218,6 +221,17 @@ public class Game extends Sprite {
 
     }
 
+    public function blur(value:Boolean):void {
+
+        var filter:BlurFilter = new BlurFilter();
+
+        _background.filter = value ? filter : null;
+
+        _entitiesLayer.filter = value ? filter : null;
+
+
+    }
+
 
     private function onEntityAdded(message:Object):void {
 
@@ -304,7 +318,7 @@ public class Game extends Sprite {
 
     public function onKeyDownDebugging(e:KeyboardEvent):void {
 
-        if(e.keyCode == Keyboard.ENTER){
+        if(e.keyCode == Keyboard.CONTROL){
             sendMessage({type: "debug", data: compileDebugData()});
         }
     }

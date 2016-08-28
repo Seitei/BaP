@@ -35,6 +35,7 @@ public class Entity{
         //TODO remove from here
         _timer = new Timer(150, 1);
         _timer.addEventListener(TimerEvent.TIMER, onTimer);
+
     }
 
     public function buildVisuals(visuals:IVisuals):void {
@@ -43,6 +44,7 @@ public class Entity{
         _graphics = _visual.getGraphics();
         _preGraphics = _visual.getPreGraphics();
         _entitySize = _visual.getSize();
+        //debugVisuals(true);
     }
 
     public function getEntityType():String {

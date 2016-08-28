@@ -1,9 +1,10 @@
 package entities {
+import starling.animation.Juggler;
 import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
 
-public class Unit extends Entity {
+public class Unit extends Entity implements IMotion{
 
     private static const DISTRIBUTION_INCREMENT:Number = 0.1;
     private static const ACCELERATION:Number = 0.5;
@@ -19,8 +20,8 @@ public class Unit extends Entity {
     private var _shootableEnemyEntities:Vector.<Entity>;
     private var _distanceWalked:Number = 0;
     private var _distanceToWayPoint:Number;
-    private var _positionXHelper:Number;
-    private var _positionYHelper:Number;
+    private var _shootableEntityPositionX:Number;
+    private var _shootableEntityPositionY:Number;
     private var _range:Number;
     private var _incrementX:Number = 0;
     private var _incrementY:Number = 0;
@@ -33,8 +34,8 @@ public class Unit extends Entity {
     private var _recalculatePath:Boolean;
     private var _positionIncrement:Object;
     private var _dispersionTime:int;
-
-
+    private var _motionState:String;
+    private var _inversion:int = 1;
 
     public function Unit(id:int, entityName:String, hitPoints: int, shootRate:Number, bullet:String, bulletSpeed:Number, bulletDamage:Number, bulletAoERadius:Number, range:Number, speed:Number) {
 
@@ -52,6 +53,8 @@ public class Unit extends Entity {
         _positionIncrement.x = 0;
         _positionIncrement.y = 0;
         _positionIncrement.distanceIncrement = 0;
+        _counter = _shootRate * 60;
+        _motionState = "accelerating";
 
     }
 
@@ -100,6 +103,10 @@ public class Unit extends Entity {
 
     }
 
+    public function getMotionState():String {
+        return _motionState;
+    }
+
     private function shoot():void {
 
         if(_shooting){
@@ -110,6 +117,7 @@ public class Unit extends Entity {
                 _recalculatePath = true;
                 _positionIncrement.x = _positionIncrement.y = _positionIncrement.distanceIncrement = 0;
                 _dispersionTime = 0;
+                _motionState = "accelerating";
             }
             else {
                 executeShot();
@@ -120,11 +128,12 @@ public class Unit extends Entity {
 
             for(var i:int = 0; i < _shootableEnemyEntities.length; i++){
 
-                _positionXHelper = _shootableEnemyEntities[i].getPosition().x;
-                _positionYHelper = _shootableEnemyEntities[i].getPosition().y;
+                _shootableEntityPositionX = _shootableEnemyEntities[i].getPosition().x;
+                _shootableEntityPositionY = _shootableEnemyEntities[i].getPosition().y;
 
-                if(Math.sqrt((_posX - _positionXHelper) * (_posX - _positionXHelper) + ( _posY - _positionYHelper) * ( _posY - _positionYHelper)) <= _range){
+                if(Math.sqrt((_posX - _shootableEntityPositionX) * (_posX - _shootableEntityPositionX) + ( _posY - _shootableEntityPositionY) * ( _posY - _shootableEntityPositionY)) <= _range){
 
+                    _motionState = "decelerating";
                     _currentTarget = _shootableEnemyEntities[i];
                     accelerateMovement(0, onTweenComplete);
 
@@ -140,8 +149,8 @@ public class Unit extends Entity {
 
             if(_dispersionTime <= DISPERSION_TIME){
 
-                _posX += _distributionIncrementX;
-                _posY += _distributionIncrementY
+                _posX += _distributionIncrementX * _inversion;
+                _posY += _distributionIncrementY * _inversion;
 
             }
 
@@ -176,6 +185,10 @@ public class Unit extends Entity {
     override public function setOwner(owner:String):void {
         super.setOwner(owner);
         _shootableEnemyEntities = EntityManager.getInstance().getShootableEnemyEntities(this.getOwner());
+
+        if(_owner != Game.getInstance().getPlayerName()){
+           _inversion = -1;
+        }
     }
 
     private function calculateNewPath():void {
@@ -201,7 +214,7 @@ public class Unit extends Entity {
 
         if(_positionIncrement.distanceIncrement == 0){
 
-            accelerateMovement(1);
+            accelerateMovement(1, onTweenComplete);
 
         }
         else {
@@ -212,23 +225,57 @@ public class Unit extends Entity {
         }
     }
 
-    private function accelerateMovement(acceleration:Number, onComplete:Function = null):void {
+    public function getSpeed():Number {
+        return _speed;
+    }
 
-        var tween:Tween = new Tween(_positionIncrement, ACCELERATION, Transitions.LINEAR);
+    public function getDirection():Object {
+        return {incrementX: _incrementX, incrementY: _incrementY};
+    }
+
+    private function accelerateMovement(acceleration:Number, onComplete:Function):void {
+
+        /*_positionIncrement.x = _incrementX * acceleration;
+        _positionIncrement.y = _incrementY * acceleration;
+        _positionIncrement.distanceIncrement = _speed * acceleration;*/
+
+
+        if(acceleration == 0){
+            _shooting = true;
+            _motionState = "still";
+            setRotation(Math.atan2(_posY - _shootableEntityPositionY, _posX - _shootableEntityPositionX) - Math.PI / 2);
+        }
+        else {
+            _motionState = "fullSpeed";
+        }
+
+
+
+        var tween:Tween = new Tween(_positionIncrement, 0, Transitions.LINEAR);
         Starling.juggler.add(tween);
         tween.animate("x", _incrementX * acceleration);
         tween.animate("y", _incrementY * acceleration);
         tween.animate("distanceIncrement", _speed * acceleration);
 
-        if(onComplete){
-            tween.onComplete = onComplete;
-        }
+        /*tween.onComplete = onComplete;
+        tween.onCompleteArgs = [acceleration];*/
+
+        //return;
 
     }
 
-    private function onTweenComplete():void {
-        _shooting = true;
-        setRotation(-Math.PI / 2 + Math.atan2(_posY - _positionYHelper, _posX - _positionXHelper));
+    private function onTweenComplete(acceleration:int):void {
+
+        if(acceleration == 0){
+            _shooting = true;
+            _motionState = "still";
+            setRotation(Math.atan2(_posY - _shootableEntityPositionY, _posX - _shootableEntityPositionX) - Math.PI / 2);
+        }
+        else {
+            _motionState = "fullSpeed";
+        }
+
+
     }
 
     private function setRotation(rotation:Number):void {
@@ -253,5 +300,6 @@ public class Unit extends Entity {
         _spawner.unitDestroyed(this);
         super.destroy();
     }
+
 }
 }

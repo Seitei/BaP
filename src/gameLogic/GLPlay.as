@@ -2,6 +2,8 @@ package gameLogic {
 import entities.Entity;
 import entities.EntityManager;
 
+import starling.animation.Tween;
+
 import starling.events.EnterFrameEvent;
 import starling.events.Event;
 

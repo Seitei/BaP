@@ -251,8 +251,8 @@ public class Unit extends Entity implements IMotion{
 
 
 
-        var tween:Tween = new Tween(_positionIncrement, 0, Transitions.LINEAR);
-        Starling.juggler.add(tween);
+        var tween:Tween = new Tween(_positionIncrement, ACCELERATION, Transitions.LINEAR);
+        Game.getJuggler().add(tween);
         tween.animate("x", _incrementX * acceleration);
         tween.animate("y", _incrementY * acceleration);
         tween.animate("distanceIncrement", _speed * acceleration);
@@ -281,7 +281,7 @@ public class Unit extends Entity implements IMotion{
     private function setRotation(rotation:Number):void {
 
         var tween:Tween = new Tween(_visual.getGraphics(), ACCELERATION / 2, Transitions.LINEAR);
-        Starling.juggler.add(tween);
+        Game.getJuggler().add(tween);
         tween.rotateTo(rotation);
 
     }

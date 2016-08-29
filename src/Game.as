@@ -18,6 +18,8 @@ import gameLogic.GameStateMachine;
 
 import net.NetConnect;
 
+import starling.animation.Juggler;
+
 import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.Event;
@@ -47,6 +49,7 @@ public class Game extends Sprite {
     private var _uiElements:UIElements;
     private var _entities:EntityManager;
     private var _debugging:Boolean = true;
+    private var _juggler:Juggler = new Juggler();
 
 
     public function Game() {
@@ -59,7 +62,11 @@ public class Game extends Sprite {
     private function onAdded(e:Event):void {
 
         loadAssets();
+        addEventListener(Event.ENTER_FRAME, onEnterFrame);
+    }
 
+    public function onEnterFrame(e:Event):void {
+        _juggler.advanceTime(1/60);
     }
 
 
@@ -399,6 +406,10 @@ public class Game extends Sprite {
 
         return _instance;
 
+    }
+
+    public static function getJuggler():Juggler {
+        return _instance._juggler;
     }
 
 }

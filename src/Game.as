@@ -49,26 +49,22 @@ public class Game extends Sprite {
     private var _uiElements:UIElements;
     private var _entities:EntityManager;
     private var _debugging:Boolean = true;
-    private var _juggler:Juggler = new Juggler();
+    private var _juggler:Juggler;
 
 
     public function Game() {
 
         _instance = this;
         addEventListener(Event.ADDED_TO_STAGE, onAdded);
+        _juggler = new Juggler();
 
     }
 
     private function onAdded(e:Event):void {
 
         loadAssets();
-        addEventListener(Event.ENTER_FRAME, onEnterFrame);
-    }
 
-    public function onEnterFrame(e:Event):void {
-        _juggler.advanceTime(1/60);
     }
-
 
     private function loadAssets():void {
 
@@ -408,8 +404,8 @@ public class Game extends Sprite {
 
     }
 
-    public static function getJuggler():Juggler {
-        return _instance._juggler;
+    public function getJuggler():Juggler {
+        return _juggler;
     }
 
 }

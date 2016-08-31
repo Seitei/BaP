@@ -49,6 +49,7 @@ public class NetConnect extends EventDispatcher{
                 break;
 
             case "NetGroup.Neighbor.Connect":
+
                 _serverConnect.startMatch(_serverConnect.getGroupSpec(), _serverConnect.getPlayerName(), (function(event:NetStatusEvent){
                     return function(data:Object) {
                         _playerNumber = parseInt(data.player_number, 10);

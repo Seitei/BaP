@@ -127,12 +127,16 @@ public class HudLayer extends Sprite{
     }
 
 
-    public function removePath(id:String):void {
+    public function removePath(id:int):void {
 
-        for(var i:int = 0; i < _linePaths[id].length - 1; i++){
+        if(_linePaths[id]){
 
-            removeChild(_linePaths[id][i]);
-            _linePaths[id][i].dispose();
+            for(var i:int = 0; i < _linePaths[id].length; i++){
+
+                removeChild(_linePaths[id][i]);
+                _linePaths[id][i].dispose();
+
+            }
 
         }
     }

@@ -1,8 +1,6 @@
 package entities {
-import starling.animation.Juggler;
 import starling.animation.Transitions;
 import starling.animation.Tween;
-import starling.core.Starling;
 
 public class Unit extends Entity implements IMotion{
 
@@ -136,6 +134,7 @@ public class Unit extends Entity implements IMotion{
                     _motionState = "decelerating";
                     _currentTarget = _shootableEnemyEntities[i];
                     accelerateMovement(0, onTweenComplete);
+                    break;
 
                 }
             }
@@ -235,32 +234,14 @@ public class Unit extends Entity implements IMotion{
 
     private function accelerateMovement(acceleration:Number, onComplete:Function):void {
 
-        /*_positionIncrement.x = _incrementX * acceleration;
-        _positionIncrement.y = _incrementY * acceleration;
-        _positionIncrement.distanceIncrement = _speed * acceleration;*/
-
-
-        if(acceleration == 0){
-            _shooting = true;
-            _motionState = "still";
-            setRotation(Math.atan2(_posY - _shootableEntityPositionY, _posX - _shootableEntityPositionX) - Math.PI / 2);
-        }
-        else {
-            _motionState = "fullSpeed";
-        }
-
-
-
         var tween:Tween = new Tween(_positionIncrement, ACCELERATION, Transitions.LINEAR);
-        Game.getJuggler().add(tween);
+        Game.getInstance().getJuggler().add(tween);
         tween.animate("x", _incrementX * acceleration);
         tween.animate("y", _incrementY * acceleration);
         tween.animate("distanceIncrement", _speed * acceleration);
 
-        /*tween.onComplete = onComplete;
-        tween.onCompleteArgs = [acceleration];*/
-
-        //return;
+        tween.onComplete = onComplete;
+        tween.onCompleteArgs = [acceleration];
 
     }
 
@@ -274,14 +255,12 @@ public class Unit extends Entity implements IMotion{
         else {
             _motionState = "fullSpeed";
         }
-
-
     }
 
     private function setRotation(rotation:Number):void {
 
-        var tween:Tween = new Tween(_visual.getGraphics(), ACCELERATION / 2, Transitions.LINEAR);
-        Game.getJuggler().add(tween);
+        var tween:Tween = new Tween(_visual.getGraphics(), ACCELERATION, Transitions.LINEAR);
+        Game.getInstance().getJuggler().add(tween);
         tween.rotateTo(rotation);
 
     }

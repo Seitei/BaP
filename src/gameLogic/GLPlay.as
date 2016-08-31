@@ -2,6 +2,8 @@ package gameLogic {
 import entities.Entity;
 import entities.EntityManager;
 
+import starling.animation.Juggler;
+
 import starling.animation.Tween;
 
 import starling.events.EnterFrameEvent;
@@ -15,12 +17,14 @@ public class GLPlay implements IGameLogic{
     private var _game:Game;
     private var _entities:Vector.<Entity>;
     private var _stateName:int;
+    private var _juggler:Juggler;
 
     public function GLPlay() {
 
         _stateName = GameStateMachine.PLAY_TIME;
         _game = Game.getInstance();
         _entities = EntityManager.getInstance().getEntitites();
+        _juggler = Game.getInstance().getJuggler();
 
     }
 
@@ -44,6 +48,7 @@ public class GLPlay implements IGameLogic{
     private function onEnterFrame(e:Event):void {
 
         _turnTime ++;
+        _juggler.advanceTime(1/60);
 
         for (var i:int = 0; i < _entities.length; i++) {
 

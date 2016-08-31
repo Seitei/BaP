@@ -1,6 +1,8 @@
 package entities {
 import entities.visuals.SpawnerVisuals;
 
+import ui.HudLayer;
+
 public class Spawner extends Entity implements IBuyable, ISpawner{
 
     private var _maxUnits:int = 5;
@@ -86,6 +88,7 @@ public class Spawner extends Entity implements IBuyable, ISpawner{
 
     override public function destroy():void {
         super.destroy();
+        HudLayer.getInstance().removePath(_id);
     }
 }
 }
